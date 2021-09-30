@@ -6,14 +6,24 @@
 package main;
 
 import Pantallas.Pantallas ;
-
+import javax.swing.*;    
 
 public class main {
+    
+    
+
+    
     public static void main(String[] args) {
 		
 		
         System.out.println("que ondaAA");
-	//Pantallas.Menu();	
-        Pantallas.Settings();
+	Pantallas.Menu();	
+        //Pantallas.Settings();
+        //Pantallas.Records();
     }
+    
+
+    
 }
+
+

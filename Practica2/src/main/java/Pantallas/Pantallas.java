@@ -7,84 +7,88 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JComboBox;
 import javax.swing.JTextField;
+import javax.swing.JList;
+import javax.swing.JTable;
+import javax.swing.JScrollPane;
 
 
 public class Pantallas {
     
+    //pantalla de menu
     public static void Menu() {
         //Frame---------------------------------------------------------------
-        JFrame recovery = new JFrame();
-        recovery.setTitle("Torres de Hanoi");
-        recovery.setSize(400,400);
-        recovery.setLayout(null);
-        recovery.setLocationRelativeTo(null);
+        JFrame frame = new JFrame();
+        frame.setTitle("Torres de Hanoi");
+        frame.setSize(400,400);
+        frame.setLayout(null);
+        frame.setLocationRelativeTo(null);
         
         //Label---------------------------------------------------------------
         JLabel lbl = new JLabel("Torres de Hanoi");
         lbl.setBounds(150,10,130,40);
-        recovery.add(lbl);
+        frame.add(lbl);
         
         //Botones---------------------------------------------------------------
         JButton NewGame = new JButton("Nuevo Juego");
         NewGame.setBounds(100,100,200,20);
         NewGame.addActionListener(new ActionListener() 
         {public void actionPerformed(ActionEvent e) {  System.out.println("1"); }});
-        recovery.add(NewGame);
+        frame.add(NewGame);
         
         JButton AutoGame = new JButton("Juego Automatico");
         AutoGame.setBounds(100,150,200,20);
         AutoGame.addActionListener(new ActionListener() 
         {public void actionPerformed(ActionEvent e) {  System.out.println("2"); }});
-        recovery.add(AutoGame);
+        frame.add(AutoGame);
         
         JButton Records = new JButton("Top 5");
         Records.setBounds(100,200,200,20);
         Records.addActionListener(new ActionListener() 
-        {public void actionPerformed(ActionEvent e) {  System.out.println("3"); }});
-        recovery.add(Records);
+        {public void actionPerformed(ActionEvent e) {  frame.dispose(); Records(); }});
+        frame.add(Records);
         
         JButton Configuration = new JButton("Configuración");
         Configuration.setBounds(100,250,200,20);
         Configuration.addActionListener(new ActionListener() 
-        {public void actionPerformed(ActionEvent e) {  System.out.println("4"); }});
-        recovery.add(Configuration);
+        {public void actionPerformed(ActionEvent e) { frame.dispose(); Settings();  }});
+        frame.add(Configuration);
         
         JButton Out = new JButton("Salir");
         Out.setBounds(200,300,100,20);
         Out.addActionListener(new ActionListener() 
         {public void actionPerformed(ActionEvent e) {  System.out.println("gracias por jugar"); System.exit(0); }});
-        recovery.add(Out);
+        frame.add(Out);
         
         //Mostrar//
-        recovery.setVisible(true);
+        frame.setVisible(true);
     }
     
     //pantalla de configuraciones
-     public static void Settings() {
+    public static void Settings() {
         //Frame---------------------------------------------------------------
-        JFrame recovery = new JFrame();
-        recovery.setTitle("Torres de Hanoy - Config");
-        recovery.setSize(900,400);
-        recovery.setLayout(null);
-        recovery.setLocationRelativeTo(null);
+        JFrame frame = new JFrame();
+        frame.setTitle("Torres de Hanoy - Config");
+        frame.setSize(900,400);
+        frame.setLayout(null);
+        frame.setLocationRelativeTo(null);
 
         //Labels---------------------------------------------------------------
         JLabel lbl = new JLabel("Configuración");
         lbl.setBounds(400,10,130,40);
-        recovery.add(lbl);
+        frame.add(lbl);
         
         JLabel lblNo = new JLabel("Cantidad de discos");
         lblNo.setBounds(200,60,130,40);
-        recovery.add(lblNo);
+        frame.add(lblNo);
         
         JLabel lbltime = new JLabel("Tiempo de partida");
         lbltime.setBounds(600,60,130,40);
-        recovery.add(lbltime);
+        frame.add(lbltime);
         
         //TextField---------------------------------------------------------------
         JTextField TextTime = new JTextField();
         TextTime.setBounds(550,100,200,20);
-        recovery.add(TextTime);
+        frame.add(TextTime);
         
         //Combobox---------------------------------------------------------------
         JComboBox combo = new JComboBox();
@@ -94,23 +98,80 @@ public class Pantallas {
         combo.addItem(5);
         combo.addItem(6);
         combo.addItem(7);
-        recovery.add(combo);
+        frame.add(combo);
         
         //Botones---------------------------------------------------------------
+        JButton back = new JButton("Regresar");
+        back.setBounds(50,300,100,20);
+        back.addActionListener(new ActionListener() 
+        {public void actionPerformed(ActionEvent e) { frame.dispose(); Menu(); }});
+        frame.add(back);
+        
         JButton Save = new JButton("Guardar");
         Save.setBounds(350,200,200,20);
         Save.addActionListener(new ActionListener() 
         {public void actionPerformed(ActionEvent e) {  System.out.println("1"); }});
-        recovery.add(Save);
+        frame.add(Save);
 
         JButton Out = new JButton("Salir");
         Out.setBounds(750,300,100,20);
         Out.addActionListener(new ActionListener() 
         {public void actionPerformed(ActionEvent e) {  System.out.println("gracias por jugar"); System.exit(0); }});
-        recovery.add(Out);
+        frame.add(Out);
         
         //Mostrar//
-        recovery.setVisible(true);
+        frame.setVisible(true);
+    }
+    
+    //pantalla de configuraciones
+    public static void Records() {
+        //Frame---------------------------------------------------------------
+        JFrame frame = new JFrame();
+        frame.setTitle("Torres de Hanoi - Records");
+        frame.setSize(400,400);
+        frame.setLayout(null);
+        frame.setLocationRelativeTo(null);
+
+        //Labels---------------------------------------------------------------
+        JLabel lbl = new JLabel("Los top 5 mejores jugadores");
+        lbl.setBounds(120,10,230,40);
+        frame.add(lbl);
+        
+        //TextField---------------------------------------------------------------
+        String nombres[] = { "Cristian", "Julian", "Milena"};
+        JList ListRecord = new JList(nombres);
+        ListRecord.setBounds(100,75,200,200);
+        //frame.add(ListRecord);
+        
+        //JTable
+  
+        String data[][]={ {"1","Sergie","2"},    
+                           {"2","Gabriela","2"},    
+                           {"3","Sachin","2"},
+                            {"4","Jai","2"},
+                            {"5","Noe","2"}};    
+        String column[]={"No.","Nombre","Movimientos"};         
+        JTable Table = new JTable(data, column);   
+  
+        JScrollPane Scroll = new JScrollPane(Table);  
+        Scroll.setBounds(75,50,250,200);        
+        frame.add(Scroll);
+
+        //Botones---------------------------------------------------------------
+        JButton back = new JButton("Regresar");
+        back.setBounds(50,300,100,20);
+        back.addActionListener(new ActionListener() 
+        {public void actionPerformed(ActionEvent e) { frame.dispose(); Menu(); }});
+        frame.add(back);
+
+        JButton Out = new JButton("Salir");
+        Out.setBounds(250,300,100,20);
+        Out.addActionListener(new ActionListener() 
+        {public void actionPerformed(ActionEvent e) {  System.out.println("gracias por jugar"); System.exit(0); }});
+        frame.add(Out);
+        
+        //Mostrar//
+        frame.setVisible(true);
     }
 
 }
