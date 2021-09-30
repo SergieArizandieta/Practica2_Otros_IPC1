@@ -14,6 +14,8 @@ import javax.swing.JScrollPane;
 
 public class Pantallas {
     
+    public static juego hanoi = new juego();
+    
     //pantalla de menu
     public static void Menu() {
         //Frame---------------------------------------------------------------
@@ -32,13 +34,13 @@ public class Pantallas {
         JButton NewGame = new JButton("Nuevo Juego");
         NewGame.setBounds(100,100,200,20);
         NewGame.addActionListener(new ActionListener() 
-        {public void actionPerformed(ActionEvent e) {  System.out.println("1"); }});
+        {public void actionPerformed(ActionEvent e) {frame.dispose(); hanoi.Initialize(); }});
         frame.add(NewGame);
         
         JButton AutoGame = new JButton("Juego Automatico");
         AutoGame.setBounds(100,150,200,20);
         AutoGame.addActionListener(new ActionListener() 
-        {public void actionPerformed(ActionEvent e) {  System.out.println("2"); }});
+        {public void actionPerformed(ActionEvent e) {  frame.dispose(); AutoGame(); }});
         frame.add(AutoGame);
         
         JButton Records = new JButton("Top 5");
@@ -137,14 +139,7 @@ public class Pantallas {
         lbl.setBounds(120,10,230,40);
         frame.add(lbl);
         
-        //TextField---------------------------------------------------------------
-        String nombres[] = { "Cristian", "Julian", "Milena"};
-        JList ListRecord = new JList(nombres);
-        ListRecord.setBounds(100,75,200,200);
-        //frame.add(ListRecord);
-        
-        //JTable
-  
+        //JTable---------------------------------------------------------------
         String data[][]={ {"1","Sergie","2"},    
                            {"2","Gabriela","2"},    
                            {"3","Sachin","2"},
@@ -173,5 +168,62 @@ public class Pantallas {
         //Mostrar//
         frame.setVisible(true);
     }
+    
+    //pantalla de juego automatico
+    public static void AutoGame() {
+        //Frame---------------------------------------------------------------
+        JFrame frame = new JFrame();
+        frame.setTitle("Torres de Hanoi - AutoGame");
+        frame.setSize(800,600);
+        frame.setLayout(null);
+        frame.setLocationRelativeTo(null);
+
+        //Labels---------------------------------------------------------------
+        
+        JLabel lblTitulo = new JLabel("Juego Automático");
+        lblTitulo.setBounds(350,10,230,40);
+        frame.add(lblTitulo);
+        
+        JLabel lblDiscos = new JLabel("Discos");
+        lblDiscos.setBounds(100,80,230,40);
+        frame.add(lblDiscos);
+        
+        JLabel lblMovimiento= new JLabel("Movimiento");
+        lblMovimiento.setBounds(175,80,230,40);
+        frame.add(lblMovimiento);
+        
+        //LabelDeValor---------------------------------------------------------
+        
+        JLabel lblValorDiscos = new JLabel("V000");
+        lblValorDiscos.setBounds(100,110,230,40);
+        frame.add(lblValorDiscos);
+        
+        JLabel lblValorMovimiento= new JLabel("V001");
+        lblValorMovimiento.setBounds(175,110,230,40);
+        frame.add(lblValorMovimiento);
+        
+        //TextField---------------------------------------------------------------
+        String nombres[] = { "Cristian", "Julian", "Milena"};
+        JList ListRecord = new JList(nombres);
+        ListRecord.setBounds(100,175,600,200);
+        frame.add(ListRecord);
+
+        //Botones---------------------------------------------------------------
+        JButton back = new JButton("Regresar");
+        back.setBounds(50,500,100,20);
+        back.addActionListener(new ActionListener() 
+        {public void actionPerformed(ActionEvent e) { frame.dispose(); Menu(); }});
+        frame.add(back);
+
+        JButton Out = new JButton("Salir");
+        Out.setBounds(600,500,100,20);
+        Out.addActionListener(new ActionListener() 
+        {public void actionPerformed(ActionEvent e) {  System.out.println("gracias por jugar"); System.exit(0); }});
+        frame.add(Out);
+        
+        //Mostrar//
+        frame.setVisible(true);
+    }
+
 
 }

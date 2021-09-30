@@ -6,7 +6,7 @@
 package main;
 
 import Pantallas.Pantallas ;
-import javax.swing.*;    
+
 
 public class main {
     
