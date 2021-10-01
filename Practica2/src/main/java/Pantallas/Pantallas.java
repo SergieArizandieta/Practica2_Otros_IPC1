@@ -8,11 +8,15 @@ import javax.swing.JLabel;
 import javax.swing.JComboBox;
 import javax.swing.JTextField;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.JScrollPane;
 
 
 public class Pantallas {
+        
+    public static int Cantidad_Discos=3;
+    public static int Tiempo=120;
     
     public static juego hanoi = new juego();
     
@@ -112,7 +116,23 @@ public class Pantallas {
         JButton Save = new JButton("Guardar");
         Save.setBounds(350,200,200,20);
         Save.addActionListener(new ActionListener() 
-        {public void actionPerformed(ActionEvent e) {  System.out.println("1"); }});
+        {public void actionPerformed(ActionEvent e) {
+            
+            try {
+                Tiempo = Integer.valueOf(TextTime.getText()); 
+                Cantidad_Discos= Integer.valueOf(combo.getSelectedItem().toString());
+            }catch (Exception a) {
+               JOptionPane.showMessageDialog(null, "Ingrese un numero ", " Ingreso erroneo " , JOptionPane.INFORMATION_MESSAGE);
+            }
+
+            if (Tiempo <=0){
+                JOptionPane.showMessageDialog(null, "Ingrese un numero mayor a 0", " Ingreso erroneo " , JOptionPane.INFORMATION_MESSAGE);
+            }
+            
+            JOptionPane.showMessageDialog(null, "Configuracion asignada", " Save"  , JOptionPane.INFORMATION_MESSAGE);
+            System.out.println(Cantidad_Discos + "Dsicos");
+            System.out.println(Tiempo+ "Timepo" );
+        }});
         frame.add(Save);
 
         JButton Out = new JButton("Salir");

@@ -1,0 +1,130 @@
+// Posicionamiento apra base 1 
+
+	JLabel Disco1 = new JLabel("Disco1", SwingConstants.CENTER);
+	Disco1.setBounds(160, 295, 80, 15); /*(+10,-15,-20,0)*/
+	Disco1.setBackground(Color.pink);
+	Disco1.setOpaque(true);
+	frame.add(Disco1);
+
+	JLabel Disco2 = new JLabel("Disco2", SwingConstants.CENTER);
+	Disco2.setBounds(150, 310, 100, 15); /*(+10,-15,-20,0)*/
+	Disco2.setBackground(Color.MAGENTA);
+	Disco2.setOpaque(true);
+	frame.add(Disco2);
+
+	JLabel Disco3 = new JLabel("Disco3", SwingConstants.CENTER);
+	Disco3.setBounds(140, 325, 120, 15); /*(+10,-15,-20,0)*/
+	Disco3.setBackground(Color.CYAN);
+	Disco3.setOpaque(true);
+	frame.add(Disco3);
+
+	JLabel Disco4 = new JLabel("Disco4", SwingConstants.CENTER);
+	Disco4.setBounds(130, 340, 140, 15); /*(+10,-15,-20,0)*/
+	Disco4.setBackground(Color.green);
+	Disco4.setOpaque(true);
+	frame.add(Disco4);
+
+	JLabel Disco5 = new JLabel("Disco5", SwingConstants.CENTER);
+	Disco5.setBounds(120, 355, 160, 15); /*(+10,0,-20,0)*/
+	Disco5.setBackground(Color.yellow);
+	Disco5.setOpaque(true);
+	frame.add(Disco5);
+
+	JLabel Disco6 = new JLabel("Disco6", SwingConstants.CENTER);
+	Disco6.setBounds(110, 370, 180, 15); /*(+10,0,-20,0)*/
+	Disco6.setBackground(Color.orange);
+	Disco6.setOpaque(true);
+	frame.add(Disco6);
+
+	JLabel Disco7 = new JLabel("Disco7", SwingConstants.CENTER);
+	Disco7.setBounds(100, 385, 200, 15);  /*(+10,0,-20,0)*/
+	Disco7.setBackground(Color.red);
+	Disco7.setOpaque(true);
+	frame.add(Disco7);
+
+// Posicionamiento apra base 2
+	JLabel Disco1 = new JLabel("Disco1", SwingConstants.CENTER);
+	Disco1.setBounds(460, 295, 80, 15); /*(+10,-15,-20,0)*/
+	Disco1.setBackground(Color.pink);
+	Disco1.setOpaque(true);
+	frame.add(Disco1);
+
+	JLabel Disco2 = new JLabel("Disco2", SwingConstants.CENTER);
+	Disco2.setBounds(450, 310, 100, 15); /*(+10,-15,-20,0)*/
+	Disco2.setBackground(Color.MAGENTA);
+	Disco2.setOpaque(true);
+	frame.add(Disco2);
+
+	JLabel Disco3 = new JLabel("Disco3", SwingConstants.CENTER);
+	Disco3.setBounds(440, 325, 120, 15); /*(+10,-15,-20,0)*/
+	Disco3.setBackground(Color.CYAN);
+	Disco3.setOpaque(true);
+	frame.add(Disco3);
+
+	JLabel Disco4 = new JLabel("Disco4", SwingConstants.CENTER);
+	Disco4.setBounds(430, 340, 140, 15); /*(+10,-15,-20,0)*/
+	Disco4.setBackground(Color.green);
+	Disco4.setOpaque(true);
+	frame.add(Disco4);
+
+	JLabel Disco5 = new JLabel("Disco5", SwingConstants.CENTER);
+	Disco5.setBounds(420, 355, 160, 15); /*(+10,0,-20,0)*/
+	Disco5.setBackground(Color.yellow);
+	Disco5.setOpaque(true);
+	frame.add(Disco5);
+
+	JLabel Disco6 = new JLabel("Disco6", SwingConstants.CENTER);
+	Disco6.setBounds(410, 370, 180, 15); /*(+10,0,-20,0)*/
+	Disco6.setBackground(Color.orange);
+	Disco6.setOpaque(true);
+	frame.add(Disco6);
+
+	JLabel Disco7 = new JLabel("Disco7", SwingConstants.CENTER);
+	Disco7.setBounds(400, 385, 200, 15);  /*(+10,0,-20,0)*/
+	Disco7.setBackground(Color.red);
+	Disco7.setOpaque(true);
+	frame.add(Disco7);
+
+
+// Posicionamiento apra base 3
+	JLabel Disco1 = new JLabel("Disco1", SwingConstants.CENTER);
+	Disco1.setBounds(760, 295, 80, 15); /*(+10,-15,-20,0)*/
+	Disco1.setBackground(Color.pink);
+	Disco1.setOpaque(true);
+	frame.add(Disco1);
+
+	JLabel Disco2 = new JLabel("Disco2", SwingConstants.CENTER);
+	Disco2.setBounds(750, 310, 100, 15); /*(+10,-15,-20,0)*/
+	Disco2.setBackground(Color.MAGENTA);
+	Disco2.setOpaque(true);
+	frame.add(Disco2);
+
+	JLabel Disco3 = new JLabel("Disco3", SwingConstants.CENTER);
+	Disco3.setBounds(740, 325, 120, 15); /*(+10,-15,-20,0)*/
+	Disco3.setBackground(Color.CYAN);
+	Disco3.setOpaque(true);
+	frame.add(Disco3);
+
+	JLabel Disco4 = new JLabel("Disco4", SwingConstants.CENTER);
+	Disco4.setBounds(730, 340, 140, 15); /*(+10,-15,-20,0)*/
+	Disco4.setBackground(Color.green);
+	Disco4.setOpaque(true);
+	frame.add(Disco4);
+
+	JLabel Disco5 = new JLabel("Disco5", SwingConstants.CENTER);
+	Disco5.setBounds(720, 355, 160, 15); /*(+10,0,-20,0)*/
+	Disco5.setBackground(Color.yellow);
+	Disco5.setOpaque(true);
+	frame.add(Disco5);
+
+	JLabel Disco6 = new JLabel("Disco6", SwingConstants.CENTER);
+	Disco6.setBounds(710, 370, 180, 15); /*(+10,0,-20,0)*/
+	Disco6.setBackground(Color.orange);
+	Disco6.setOpaque(true);
+	frame.add(Disco6);
+
+	JLabel Disco7 = new JLabel("Disco7", SwingConstants.CENTER);
+	Disco7.setBounds(700, 385, 200, 15);  /*(+10,0,-20,0)*/
+	Disco7.setBackground(Color.red);
+	Disco7.setOpaque(true);
+	frame.add(Disco7);
