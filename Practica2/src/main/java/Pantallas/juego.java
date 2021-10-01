@@ -1,6 +1,7 @@
 
 package Pantallas;
 
+import Objetos.torreBase;
 import static Pantallas.Pantallas.Menu;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
@@ -8,17 +9,21 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.ImageIcon;
-import java.awt.Image;
-import java.awt.Toolkit;
 import javax.swing.SwingConstants;
 
-import Pantallas.Pantallas ;
+
+
 
 public class juego {
     public static JLabel Disco1,Disco2,Disco3,Disco4,Disco5,Disco6,Disco7;
-    
+    public static int[][] Base = new int[7][2];
+    public static torreBase T1[] = new torreBase[7];
+    public static torreBase T2[] = new torreBase[7];
+    public static torreBase T3[] = new torreBase[7];
+
+
     public void Initialize() {
+        
         System.out.println(Pantallas.Cantidad_Discos);
         System.out.println(Pantallas.Tiempo);
         //Frame---------------------------------------------------------------
@@ -84,11 +89,11 @@ public class juego {
         
         //LabelDeValor---------------------------------------------------------
         
-        JLabel lblValorTiempo = new JLabel("V000");
+        JLabel lblValorTiempo = new JLabel(String.valueOf(Pantallas.Tiempo));
         lblValorTiempo.setBounds(600,40,230,40);
         frame.add(lblValorTiempo);
         
-        JLabel lblValorMovimiento= new JLabel("V001");
+        JLabel lblValorMovimiento= new JLabel(String.valueOf(Pantallas.Cantidad_Discos));
         lblValorMovimiento.setBounds(655,40,230,40);
         frame.add(lblValorMovimiento);
         
@@ -153,5 +158,35 @@ public class juego {
         frame.setVisible(true);
     }
     
-
+    public void InitializeTowers(){
+        
+        int posicionx = 100;
+        int posiciony = 385;
+        int largo = 200;
+        int auxcontadot =1;
+        //Cambio +10 x , -15 y , -20 largo
+        posicionx += (Pantallas.Cantidad_Discos-1) * 10;
+        posiciony -= (Pantallas.Cantidad_Discos-1) * 15;
+        largo -= (Pantallas.Cantidad_Discos-1) * 20;
+       
+        
+        for (int i=0;i<7;i++){
+            
+            if (Pantallas.Cantidad_Discos>=auxcontadot){
+                T1[i] = new torreBase(auxcontadot,posicionx,posiciony,largo);
+                posicionx -= 10;
+                posiciony += 15;   
+                largo += 20;
+            }else{
+                 T1[i] = new torreBase(0,0,0,0);
+            }
+            auxcontadot+=1;
+        }
+        
+        for (int i=6;i>=0;i--){
+            if (T1[i].getDisco() !=0){
+                 System.out.println( T1[i].getDisco() + " enx:" + T1[i].getPosicionx() + " Eny:" + T1[i].getPosiciony() + " largo: " + T1[i].getLargo());
+            } 
+        }
+    }
 }
