@@ -5,20 +5,6 @@ package Objetos;
 public class torreBase {
 
     /**
-     * @return the largo
-     */
-    public int getLargo() {
-        return largo;
-    }
-
-    /**
-     * @param largo the largo to set
-     */
-    public void setLargo(int largo) {
-        this.largo = largo;
-    }
-
-    /**
      * @return the Disco
      */
     public int getDisco() {
@@ -33,45 +19,59 @@ public class torreBase {
     }
 
     /**
-     * @return the Posicionx
+     * @return the no
      */
+    public int getNo() {
+        return no;
+    }
+
+    /**
+     * @param no the no to set
+     */
+    public void setNo(int no) {
+        this.no = no;
+    }
+
+
+
+    public int getLargo() {
+        return largo;
+    }
+
+    public void setLargo(int largo) {
+        this.largo = largo;
+    }
+
     public int getPosicionx() {
         return Posicionx;
     }
 
-    /**
-     * @param Posicionx the Posicionx to set
-     */
     public void setPosicionx(int Posicionx) {
         this.Posicionx = Posicionx;
     }
 
-    /**
-     * @return the Posiciony
-     */
     public int getPosiciony() {
         return Posiciony;
     }
 
-    /**
-     * @param Posiciony the Posiciony to set
-     */
     public void setPosiciony(int Posiciony) {
         this.Posiciony = Posiciony;
     }
 
   
    
-    private int Disco ;
+    private int no ;
     private int Posicionx ;
     private int Posiciony ;
     private int largo;
+    private int Disco;
     
-    public torreBase(int Disco,int Posicionx,int Posiciony,int largo){
-        this.Disco =Disco;
+    public torreBase(int no,int Posicionx,int Posiciony,int largo,int Disco){
+        this.no =no;
         this.Posicionx=Posicionx;
         this.Posiciony=Posiciony;
         this.largo=largo;
+        this.Disco = Disco;
     }
 
 

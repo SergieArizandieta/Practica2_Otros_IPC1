@@ -12,6 +12,7 @@ import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import Operaciones.operaciones;
 import Hilos.General;
+import Hilos.Tiempo;
 
 
 public class juego {
@@ -26,10 +27,13 @@ public class juego {
     public static torreBase T2[] = new torreBase[7];
     public static torreBase T3[] = new torreBase[7];
     public static General Hgeneral = new General();
+    public static Tiempo Htimepo = new Tiempo();
     
     public void startgame(){
-    Initialize();
-    Hgeneral.start();
+        Initialize();
+        Htimepo.start();
+        Hgeneral.start();
+        
     }
 
     public void Initialize() {
@@ -45,31 +49,51 @@ public class juego {
         frame.setLocationRelativeTo(null);
         
         
-        for (int i=6;i>=0;i--){
+        for (int i=0;i<7;i++){
             if (T1[i].getDisco() !=0){
-                JLabel Disccscs = new JLabel("Disco" + T1[i].getDisco(), SwingConstants.CENTER);
-                Disccscs.setBounds(T1[i].getPosicionx(), T1[i].getPosiciony(), T1[i].getLargo(), 15);
-                
                 if(T1[i].getDisco()==1){
-                    Disccscs.setBackground(Color.pink);
+                    Disco1 = new JLabel("Disco" + T1[i].getDisco(), SwingConstants.CENTER);
+                    Disco1.setBounds(T1[i].getPosicionx(), T1[i].getPosiciony(), T1[i].getLargo(), 15);
+                    Disco1.setBackground(Color.pink);
+                    Disco1.setOpaque(true);
+                    frame.add(Disco1);
                 }else if(T1[i].getDisco() ==2){
-                    Disccscs.setBackground(Color.MAGENTA);
+                    Disco2 = new JLabel("Disco" + T1[i].getDisco(), SwingConstants.CENTER);
+                    Disco2.setBounds(T1[i].getPosicionx(), T1[i].getPosiciony(), T1[i].getLargo(), 15);
+                    Disco2.setBackground(Color.MAGENTA);
+                    Disco2.setOpaque(true);
+                    frame.add(Disco2);
                 }else if(T1[i].getDisco() ==3){
-                    Disccscs.setBackground(Color.CYAN);
+                    Disco3 = new JLabel("Disco" + T1[i].getDisco(), SwingConstants.CENTER);
+                    Disco3.setBounds(T1[i].getPosicionx(), T1[i].getPosiciony(), T1[i].getLargo(), 15);
+                    Disco3.setBackground(Color.CYAN);
+                    Disco3.setOpaque(true);
+                    frame.add(Disco3);
                 }else if(T1[i].getDisco() ==4){
-                    Disccscs.setBackground(Color.green);
+                    Disco4 = new JLabel("Disco" + T1[i].getDisco(), SwingConstants.CENTER);
+                    Disco4.setBounds(T1[i].getPosicionx(), T1[i].getPosiciony(), T1[i].getLargo(), 15);
+                    Disco4.setBackground(Color.green);
+                    Disco4.setOpaque(true);
+                    frame.add(Disco4);
                 }else if(T1[i].getDisco() ==5){
-                    Disccscs.setBackground(Color.yellow);
+                    Disco5 = new JLabel("Disco" + T1[i].getDisco(), SwingConstants.CENTER);
+                    Disco5.setBounds(T1[i].getPosicionx(), T1[i].getPosiciony(), T1[i].getLargo(), 15);
+                    Disco5.setBackground(Color.yellow);
+                    Disco5.setOpaque(true);
+                    frame.add(Disco5);
                 }else if(T1[i].getDisco() ==6){
-                    Disccscs.setBackground(Color.orange);
+                    Disco6 = new JLabel("Disco" + T1[i].getDisco(), SwingConstants.CENTER);
+                    Disco6.setBounds(T1[i].getPosicionx(), T1[i].getPosiciony(), T1[i].getLargo(), 15);
+                    Disco6.setBackground(Color.orange);
+                    Disco6.setOpaque(true);
+                    frame.add(Disco6);
                 }else if(T1[i].getDisco() ==7){
-                    Disccscs.setBackground(Color.red);
-                }else if(T1[i].getDisco() ==8){
-                    Disccscs.setBackground(Color.red);
-                }
-                
-                Disccscs.setOpaque(true);
-                frame.add(Disccscs);
+                    Disco7 = new JLabel("Disco" + T1[i].getDisco(), SwingConstants.CENTER);
+                    Disco7.setBounds(T1[i].getPosicionx(), T1[i].getPosiciony(), T1[i].getLargo(), 15);
+                    Disco7.setBackground(Color.red);
+                    Disco7.setOpaque(true);
+                    frame.add(Disco7);
+                }  
             } 
         }
         
@@ -156,6 +180,12 @@ public class juego {
         {public void actionPerformed(ActionEvent e) {  System.out.println("Next1"); operaciones.NextT1();  }});
         frame.add(Next1);
         
+        JButton DoubleNext1 = new JButton(">>");
+        DoubleNext1.setBounds(250,450,50,20);
+        DoubleNext1.addActionListener(new ActionListener() 
+        {public void actionPerformed(ActionEvent e) {  System.out.println("DoubleNext1");   }});
+        frame.add(DoubleNext1);
+        
         
         JButton Next2 = new JButton(">");
         Next2.setBounds(550,425,50,20);
@@ -176,38 +206,61 @@ public class juego {
         {public void actionPerformed(ActionEvent e) {  System.out.println("Back3");   operaciones.Back3();}});
         frame.add(Back3);
         
+        JButton DoubleBack3 = new JButton("<<");
+        DoubleBack3.setBounds(700,450,50,20);
+        DoubleBack3.addActionListener(new ActionListener() 
+        {public void actionPerformed(ActionEvent e) {  System.out.println("DoubleBack3");   }});
+        frame.add(DoubleBack3);
+        
         //Mostrar//
         frame.setVisible(true);
     }
     
     public void InitializeTowers(){
-        int posicionx = 100;
-        int posiciony = 385;
-        int largo = 200;
-        int auxcontadot =1;
-        //Cambio +10 x , -15 y , -20 largo
-        posicionx += (Pantallas.Cantidad_Discos-1) * 10;
-        posiciony -= (Pantallas.Cantidad_Discos-1) * 15;
-        largo -= (Pantallas.Cantidad_Discos-1) * 20;
 
+        int posiciony = 295;
         for (int i=0;i<7;i++){
-            
-            if (Pantallas.Cantidad_Discos>=auxcontadot){
-                T1[i] = new torreBase(auxcontadot,posicionx,posiciony,largo);
-                posicionx -= 10;
-                posiciony += 15;   
-                largo += 20;
-            }else{
-                 T1[i] = new torreBase(0,0,0,0);
-            }
-            auxcontadot+=1;
+            T1[i] = new torreBase(i+1,0,posiciony,0,0);
+            T2[i] = new torreBase(i+1,0,posiciony,0,0);
+            T3[i] = new torreBase(i+1,0,posiciony,0,0);
+           
+            posiciony += 15;        
         }
         
-         for (int i=0;i<7;i++){
-            T2[i] = new torreBase(0,0,0,0);
-            T3[i] = new torreBase(0,0,0,0);      
+        int largo = 80;
+        int posicionx = 160;
+        int auxcontador =1;
+        int auxAsignarDisco =Pantallas.Cantidad_Discos;
+        
+        largo += (Pantallas.Cantidad_Discos-1)*20;
+        posicionx -= (Pantallas.Cantidad_Discos-1)*10;
+        
+        for (int i=6;i>0;i--){
+            if (T1[i].getDisco() ==0){
+                if (Pantallas.Cantidad_Discos >= auxcontador){
+                    T1[i].setDisco(auxAsignarDisco);
+                    auxAsignarDisco -=1;
+                    T1[i].setLargo(largo);
+                    largo-=20;
+                    T1[i].setPosicionx(posicionx);
+                    posicionx += 10;
+                    
+                    auxcontador +=1;
+                }
+            }        
+        } 
+       
+        for (int i=0;i<7;i++){
+            System.out.println( " Correlativo " +T1[i].getNo()  + " Disco "+ T1[i].getDisco() + " enx:" + T1[i].getPosicionx() + " Eny:" + T1[i].getPosiciony() + " largo: " + T1[i].getLargo());
+        }
+        /*
+        for (int i=0;i<7;i++){
+            System.out.println( " Correlativo " +T2[i].getNo()  + " Disco "+ T2[i].getDisco() + " enx:" + T2[i].getPosicionx() + " Eny:" + T2[i].getPosiciony() + " largo: " + T2[i].getLargo());
         }
         
+        for (int i=0;i<7;i++){
+            System.out.println( " Correlativo " +T3[i].getNo()  + " Disco "+ T3[i].getDisco() + " enx:" + T3[i].getPosicionx() + " Eny:" + T3[i].getPosiciony() + " largo: " + T3[i].getLargo());
+        }*/
         
     }
 }
