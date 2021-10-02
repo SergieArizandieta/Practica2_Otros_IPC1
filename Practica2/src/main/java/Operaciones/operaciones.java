@@ -1,6 +1,11 @@
 
 package Operaciones;
 import Pantallas.Pantallas;
+import static Pantallas.Pantallas.Cantidad_Discos;
+import static Pantallas.Pantallas.Menu;
+import static Pantallas.Pantallas.Tiempo;
+import static Pantallas.Pantallas.lblEstado;
+import static Pantallas.Pantallas.refresTable;
 import static Pantallas.juego.Disco1;
 import static Pantallas.juego.Disco2;
 import static Pantallas.juego.Disco3;
@@ -8,12 +13,17 @@ import static Pantallas.juego.Disco4;
 import static Pantallas.juego.Disco5;
 import static Pantallas.juego.Disco6;
 import static Pantallas.juego.Disco7;
-import static Pantallas.juego.GameOver;
+import static Pantallas.juego.Hgeneral;
+import static Pantallas.juego.Htimepo;
+import static Pantallas.juego.MoviemintosTotales;
 import static Pantallas.juego.T1;
 import static Pantallas.juego.T2;
 import static Pantallas.juego.T3;
+import static Pantallas.juego.frame;
+
 import javax.swing.JOptionPane;
 public class operaciones {
+    public static String NombreJugador = ""; 
   
     //Mover disco de Torre 1 a Torre 2
     public  static void NextT1(){
@@ -47,6 +57,7 @@ public class operaciones {
     } 
     
     public static void T1aT2(int i,int T1posiX,int T1auxDisc,int T1Large,int auxPosicion){
+        MoviemintosTotales += 1;
         T2[i].setPosicionx(T1posiX);
         T2[i].setDisco(T1auxDisc);
         T2[i].setLargo(T1Large);
@@ -102,6 +113,7 @@ public class operaciones {
     } 
     
     public static void T1aT3(int i,int T1posiX,int T1auxDisc,int T1Large,int auxPosicion){
+        MoviemintosTotales += 1;
         T3[i].setPosicionx(T1posiX);
         T3[i].setDisco(T1auxDisc);
         T3[i].setLargo(T1Large);
@@ -157,6 +169,7 @@ public class operaciones {
     } 
     
     public static void T2aT3(int i,int T2posiX,int T2auxDisc,int T2Large,int auxPosicion){
+        MoviemintosTotales += 1;
         T3[i].setPosicionx(T2posiX);
         T3[i].setDisco(T2auxDisc);
         T3[i].setLargo(T2Large);
@@ -212,6 +225,7 @@ public class operaciones {
     } 
 
     public static void T2aT1(int i,int T2posiX,int T2auxDisc,int T2Large,int auxPosicion){
+        MoviemintosTotales += 1;
         T1[i].setPosicionx(T2posiX);
         T1[i].setDisco(T2auxDisc);
         T1[i].setLargo(T2Large);
@@ -267,6 +281,7 @@ public class operaciones {
     } 
 
     public static void T3aT2(int i,int T3posiX,int T3auxDisc,int T3Large,int auxPosicion){
+        MoviemintosTotales += 1;
         T2[i].setPosicionx(T3posiX);
         T2[i].setDisco(T3auxDisc);
         T2[i].setLargo(T3Large);
@@ -321,6 +336,7 @@ public class operaciones {
     } 
 
     public static void T3aT1(int i,int T3posiX,int T3auxDisc,int T3Large,int auxPosicion){
+        MoviemintosTotales += 1;
         T1[i].setPosicionx(T3posiX);
         T1[i].setDisco(T3auxDisc);
         T1[i].setLargo(T3Large);
@@ -358,19 +374,21 @@ public class operaciones {
                         auxVerificador = T3[i].getDisco();
                         contador+=1;
                         if(contador == Pantallas.Cantidad_Discos){
-                            String input = (String)JOptionPane.showInputDialog(null, "Ingresa tu nombre:","Ganador", JOptionPane.QUESTION_MESSAGE,null,null,"default text");
-                            GameOver = false;
+                            Htimepo.suspend(); 
+                            
+                            NombreJugador = (String)JOptionPane.showInputDialog(null, "Ingresa tu nombre:","Ganador", JOptionPane.QUESTION_MESSAGE,null,null,"default text");
+                            refresTable();                           
+                            frame.dispose(); 
+                            Menu();
+                            RefreshAll();
+
                             break;
                         }
                     }else{
                         contador=0;
                     }
                 }
-            }
-        
-           
-            
-            
+            }     
         }
         
     
@@ -442,4 +460,13 @@ public class operaciones {
             } 
         }
     }
+
+    public static void RefreshAll(){
+        
+        Hgeneral.suspend(); Htimepo.suspend(); 
+        lblEstado.setText("Config: Predeterminada");
+        Tiempo = 120; 
+        Cantidad_Discos= 3;
+    }
+    
 }

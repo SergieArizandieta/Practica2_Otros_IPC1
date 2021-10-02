@@ -1,5 +1,6 @@
 package Pantallas;
 
+import static Operaciones.operaciones.NombreJugador;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
@@ -11,14 +12,74 @@ import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.JScrollPane;
-
+import static Pantallas.juego.MoviemintosTotales;
 
 public class Pantallas {
-        
+    public static JLabel lblEstado = new JLabel("Config: Predeterminada");
+    
+    
+    public static String[][] Table = new String[5][3];   
     public static int Cantidad_Discos=3;
     public static int Tiempo=120;
-    
+
     public static juego hanoi = new juego();
+    
+    //Inicalizar la tabla
+    public static void initializeTable(){
+        
+        for (int i=0;i<5;i++){
+            Table[i][0] =String.valueOf(i+1);
+            Table[i][1] ="0";
+            Table[i][2] ="0";
+        }
+        
+        for (int i=0;i<5;i++){
+            System.out.println(Table[i][0]+" -- " +Table[i][1] + " -- " + Table[i][2] );
+          
+        }
+    }
+    
+    //Actulizar la tabla
+    public static void refresTable(){
+       
+        String[][] AuxTable = new String[6][2];   
+
+        
+        for (int i=0;i<5;i++){
+            AuxTable[i][0] = Table[i][1];
+            AuxTable[i][1] =Table[i][2];
+        }
+       
+        AuxTable[5][0] = NombreJugador;
+        AuxTable[5][1] = String.valueOf(MoviemintosTotales);
+        for (int x = 0; x < 6; x++) {
+            for (int y = 0; y < 6 - 1; y++) {
+                String nombreActual = AuxTable[y][0];
+                int elementoActual = Integer.valueOf(AuxTable[y][1]);
+
+                String nombreSiguiente= AuxTable[y+1][0];
+                int elementoSiguiente = Integer.valueOf(AuxTable[y + 1][1]);
+                if (elementoActual < elementoSiguiente) {
+                    AuxTable[y][0] = nombreSiguiente;
+                    AuxTable[y][1] = String.valueOf(elementoSiguiente);
+                    AuxTable[y + 1][0] = nombreActual;
+                    AuxTable[y + 1][1] = String.valueOf(elementoActual);
+                }
+            }
+        }
+        
+        for (int i=0;i<6;i++){
+            System.out.println(AuxTable[i][0] + " -- " + AuxTable[i][1]);
+        }
+        
+        for (int i=0;i<5;i++){
+            Table[i][1] = AuxTable[i][0];
+            Table[i][2] =AuxTable[i][1];
+        }
+        
+    }
+
+ 
     
     //pantalla de menu
     public static void Menu() {
@@ -34,6 +95,9 @@ public class Pantallas {
         lbl.setBounds(150,10,130,40);
         frame.add(lbl);
         
+       
+        lblEstado.setBounds(20,300,150,40);
+        frame.add(lblEstado);
         //Botones---------------------------------------------------------------
         JButton NewGame = new JButton("Nuevo Juego");
         NewGame.setBounds(100,100,200,20);
@@ -87,8 +151,8 @@ public class Pantallas {
         lblNo.setBounds(200,60,130,40);
         frame.add(lblNo);
         
-        JLabel lbltime = new JLabel("Tiempo de partida");
-        lbltime.setBounds(600,60,130,40);
+        JLabel lbltime = new JLabel("Tiempo de partida en segundos");
+        lbltime.setBounds(550,60,200,40);
         frame.add(lbltime);
         
         //TextField---------------------------------------------------------------
@@ -117,21 +181,33 @@ public class Pantallas {
         Save.setBounds(350,200,200,20);
         Save.addActionListener(new ActionListener() 
         {public void actionPerformed(ActionEvent e) {
-            
+            boolean validacion = true;
+
             try {
-                Tiempo = Integer.valueOf(TextTime.getText()); 
-                Cantidad_Discos= Integer.valueOf(combo.getSelectedItem().toString());
+                if(validacion){
+                    Tiempo = Integer.valueOf(TextTime.getText()); 
+                    Cantidad_Discos= Integer.valueOf(combo.getSelectedItem().toString());
+                }
             }catch (Exception a) {
+               validacion = false;
                JOptionPane.showMessageDialog(null, "Ingrese un numero ", " Ingreso erroneo " , JOptionPane.INFORMATION_MESSAGE);
             }
-
+            
             if (Tiempo <=0){
                 JOptionPane.showMessageDialog(null, "Ingrese un numero mayor a 0", " Ingreso erroneo " , JOptionPane.INFORMATION_MESSAGE);
+                validacion = false;
             }
             
-            JOptionPane.showMessageDialog(null, "Configuracion asignada", " Save"  , JOptionPane.INFORMATION_MESSAGE);
-            System.out.println(Cantidad_Discos + "Dsicos");
-            System.out.println(Tiempo+ "Timepo" );
+            
+            if (validacion){
+                lblEstado.setText("Config: Personalizada");
+                Tiempo = Integer.valueOf(TextTime.getText()); 
+                Cantidad_Discos= Integer.valueOf(combo.getSelectedItem().toString());
+                JOptionPane.showMessageDialog(null, "Configuracion asignada", " Save"  , JOptionPane.INFORMATION_MESSAGE);
+            }else{
+                Tiempo = 120; 
+                Cantidad_Discos= 3;
+            }
         }});
         frame.add(Save);
 
@@ -160,11 +236,7 @@ public class Pantallas {
         frame.add(lbl);
         
         //JTable---------------------------------------------------------------
-        String data[][]={ {"1","Sergie","2"},    
-                           {"2","Gabriela","2"},    
-                           {"3","Sachin","2"},
-                            {"4","Jai","2"},
-                            {"5","Noe","2"}};    
+        String data[][]= Table; 
         String column[]={"No.","Nombre","Movimientos"};         
         JTable Table = new JTable(data, column);   
   

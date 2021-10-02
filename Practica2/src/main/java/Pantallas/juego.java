@@ -13,9 +13,14 @@ import javax.swing.SwingConstants;
 import Operaciones.operaciones;
 import Hilos.General;
 import Hilos.Tiempo;
+import static Operaciones.operaciones.RefreshAll;
 
 
 public class juego {
+  
+   public static boolean Fistime =true;
+   public static int MoviemintosTotales = 0;
+    
     public static boolean GameOver = true;
     public static JFrame frame;
     public static JLabel Disco1,Disco2,Disco3,Disco4,Disco5,Disco6,Disco7;
@@ -30,9 +35,19 @@ public class juego {
     public static Tiempo Htimepo = new Tiempo();
     
     public void startgame(){
-        Initialize();
-        Htimepo.start();
-        Hgeneral.start();
+        Initialize(); 
+        GameOver = true;
+        if (Fistime){
+            Htimepo.start();
+            Hgeneral.start();
+            Fistime = false;
+        }else{
+            
+            Htimepo.resume();
+            Hgeneral.resume();
+        }
+       
+        
         
     }
 
@@ -113,7 +128,7 @@ public class juego {
         lblValorTiempo.setBounds(600,40,230,40);
         frame.add(lblValorTiempo);
         
-        lblValorMovimiento= new JLabel(String.valueOf(Pantallas.Cantidad_Discos));
+        lblValorMovimiento= new JLabel(String.valueOf(MoviemintosTotales));
         lblValorMovimiento.setBounds(655,40,230,40);
         frame.add(lblValorMovimiento);
         
@@ -165,11 +180,11 @@ public class juego {
         JButton back = new JButton("Regresar");
         back.setBounds(50,500,100,20);
         back.addActionListener(new ActionListener() 
-        {public void actionPerformed(ActionEvent e) { frame.dispose(); Menu(); }});
+        {public void actionPerformed(ActionEvent e) {RefreshAll(); frame.dispose(); Menu();  }});
         frame.add(back);
 
         JButton Out = new JButton("Salir");
-        Out.setBounds(600,500,100,20);
+        Out.setBounds(825,500,100,20);
         Out.addActionListener(new ActionListener() 
         {public void actionPerformed(ActionEvent e) {  System.exit(0); }});
         frame.add(Out);
@@ -249,11 +264,11 @@ public class juego {
                 }
             }        
         } 
-       
+         /*
         for (int i=0;i<7;i++){
             System.out.println( " Correlativo " +T1[i].getNo()  + " Disco "+ T1[i].getDisco() + " enx:" + T1[i].getPosicionx() + " Eny:" + T1[i].getPosiciony() + " largo: " + T1[i].getLargo());
         }
-        /*
+      
         for (int i=0;i<7;i++){
             System.out.println( " Correlativo " +T2[i].getNo()  + " Disco "+ T2[i].getDisco() + " enx:" + T2[i].getPosicionx() + " Eny:" + T2[i].getPosiciony() + " largo: " + T2[i].getLargo());
         }

@@ -6,12 +6,13 @@
 package main;
 
 import Pantallas.Pantallas ;
+import static Pantallas.Pantallas.initializeTable;
 
 
 public class main {
 
     public static void main(String[] args) {
-      
+        initializeTable();
 	Pantallas.Menu();	
         
     }
