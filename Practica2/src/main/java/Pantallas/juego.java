@@ -11,23 +11,33 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import Operaciones.operaciones;
-
+import Hilos.General;
 
 
 public class juego {
+    public static boolean GameOver = true;
+    public static JFrame frame;
     public static JLabel Disco1,Disco2,Disco3,Disco4,Disco5,Disco6,Disco7;
+    public static JLabel lblValorTiempo,lblValorMovimiento;
+    
+    
     public static int[][] Base = new int[7][2];
     public static torreBase T1[] = new torreBase[7];
     public static torreBase T2[] = new torreBase[7];
     public static torreBase T3[] = new torreBase[7];
-
+    public static General Hgeneral = new General();
+    
+    public void startgame(){
+    Initialize();
+    Hgeneral.start();
+    }
 
     public void Initialize() {
         
         System.out.println(Pantallas.Cantidad_Discos);
         System.out.println(Pantallas.Tiempo);
         //Frame---------------------------------------------------------------
-        JFrame frame = new JFrame();
+        frame = new JFrame();
         frame.setTitle("Torres de Hanoi - Game");
         frame.setSize(1000,600);
         frame.setLayout(null);
@@ -75,11 +85,11 @@ public class juego {
         
         //LabelDeValor---------------------------------------------------------
         
-        JLabel lblValorTiempo = new JLabel(String.valueOf(Pantallas.Tiempo));
+        lblValorTiempo = new JLabel(String.valueOf(Pantallas.Tiempo));
         lblValorTiempo.setBounds(600,40,230,40);
         frame.add(lblValorTiempo);
         
-        JLabel lblValorMovimiento= new JLabel(String.valueOf(Pantallas.Cantidad_Discos));
+        lblValorMovimiento= new JLabel(String.valueOf(Pantallas.Cantidad_Discos));
         lblValorMovimiento.setBounds(655,40,230,40);
         frame.add(lblValorMovimiento);
         
@@ -150,20 +160,20 @@ public class juego {
         JButton Next2 = new JButton(">");
         Next2.setBounds(550,425,50,20);
         Next2.addActionListener(new ActionListener() 
-        {public void actionPerformed(ActionEvent e) {  System.out.println("Next2");  }});
+        {public void actionPerformed(ActionEvent e) {  System.out.println("Next2"); operaciones.NextT2();  }});
         frame.add(Next2);
         
         JButton Back2 = new JButton("<");
         Back2.setBounds(400,425,50,20);
         Back2.addActionListener(new ActionListener() 
-        {public void actionPerformed(ActionEvent e) {  System.out.println("Back2");  }});
+        {public void actionPerformed(ActionEvent e) {  System.out.println("Back2"); operaciones.Back2(); }});
         frame.add(Back2);
         
         
         JButton Back3 = new JButton("<");
         Back3.setBounds(700,425,50,20);
         Back3.addActionListener(new ActionListener() 
-        {public void actionPerformed(ActionEvent e) {  System.out.println("Back3");  }});
+        {public void actionPerformed(ActionEvent e) {  System.out.println("Back3");   operaciones.Back3();}});
         frame.add(Back3);
         
         //Mostrar//
@@ -195,9 +205,7 @@ public class juego {
         
          for (int i=0;i<7;i++){
             T2[i] = new torreBase(0,0,0,0);
-            T3[i] = new torreBase(0,0,0,0);
-            
-           
+            T3[i] = new torreBase(0,0,0,0);      
         }
         
         

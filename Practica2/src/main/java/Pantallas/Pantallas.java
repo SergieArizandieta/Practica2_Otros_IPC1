@@ -38,7 +38,7 @@ public class Pantallas {
         JButton NewGame = new JButton("Nuevo Juego");
         NewGame.setBounds(100,100,200,20);
         NewGame.addActionListener(new ActionListener() 
-        {public void actionPerformed(ActionEvent e) {frame.dispose();hanoi.InitializeTowers(); hanoi.Initialize(); }});
+        {public void actionPerformed(ActionEvent e) {frame.dispose();hanoi.InitializeTowers(); hanoi.startgame(); }});
         frame.add(NewGame);
         
         JButton AutoGame = new JButton("Juego Automatico");
