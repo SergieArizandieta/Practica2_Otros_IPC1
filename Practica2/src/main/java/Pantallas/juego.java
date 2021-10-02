@@ -171,45 +171,45 @@ public class juego {
         JButton Out = new JButton("Salir");
         Out.setBounds(600,500,100,20);
         Out.addActionListener(new ActionListener() 
-        {public void actionPerformed(ActionEvent e) {  System.out.println("gracias por jugar"); System.exit(0); }});
+        {public void actionPerformed(ActionEvent e) {  System.exit(0); }});
         frame.add(Out);
         
         JButton Next1 = new JButton(">");
         Next1.setBounds(250,425,50,20);
         Next1.addActionListener(new ActionListener() 
-        {public void actionPerformed(ActionEvent e) {  System.out.println("Next1"); operaciones.NextT1();  }});
+        {public void actionPerformed(ActionEvent e) {   operaciones.NextT1();  }});
         frame.add(Next1);
         
         JButton DoubleNext1 = new JButton(">>");
         DoubleNext1.setBounds(250,450,50,20);
         DoubleNext1.addActionListener(new ActionListener() 
-        {public void actionPerformed(ActionEvent e) {  System.out.println("DoubleNext1");   }});
+        {public void actionPerformed(ActionEvent e) {   operaciones.DoubleNextT1(); }});
         frame.add(DoubleNext1);
         
         
         JButton Next2 = new JButton(">");
         Next2.setBounds(550,425,50,20);
         Next2.addActionListener(new ActionListener() 
-        {public void actionPerformed(ActionEvent e) {  System.out.println("Next2"); operaciones.NextT2();  }});
+        {public void actionPerformed(ActionEvent e) { operaciones.NextT2();  }});
         frame.add(Next2);
         
         JButton Back2 = new JButton("<");
         Back2.setBounds(400,425,50,20);
         Back2.addActionListener(new ActionListener() 
-        {public void actionPerformed(ActionEvent e) {  System.out.println("Back2"); operaciones.Back2(); }});
+        {public void actionPerformed(ActionEvent e) {  operaciones.Back2(); }});
         frame.add(Back2);
         
         
         JButton Back3 = new JButton("<");
         Back3.setBounds(700,425,50,20);
         Back3.addActionListener(new ActionListener() 
-        {public void actionPerformed(ActionEvent e) {  System.out.println("Back3");   operaciones.Back3();}});
+        {public void actionPerformed(ActionEvent e) {    operaciones.Back3();}});
         frame.add(Back3);
         
         JButton DoubleBack3 = new JButton("<<");
         DoubleBack3.setBounds(700,450,50,20);
         DoubleBack3.addActionListener(new ActionListener() 
-        {public void actionPerformed(ActionEvent e) {  System.out.println("DoubleBack3");   }});
+        {public void actionPerformed(ActionEvent e) {   operaciones.DoubleBack3();   }});
         frame.add(DoubleBack3);
         
         //Mostrar//
@@ -235,7 +235,7 @@ public class juego {
         largo += (Pantallas.Cantidad_Discos-1)*20;
         posicionx -= (Pantallas.Cantidad_Discos-1)*10;
         
-        for (int i=6;i>0;i--){
+        for (int i=6;i>=0;i--){
             if (T1[i].getDisco() ==0){
                 if (Pantallas.Cantidad_Discos >= auxcontador){
                     T1[i].setDisco(auxAsignarDisco);
