@@ -10,7 +10,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
-
+import Operaciones.operaciones;
 
 
 
@@ -34,48 +34,34 @@ public class juego {
         frame.getContentPane().setBackground(Color.LIGHT_GRAY);
         frame.setLocationRelativeTo(null);
         
-        //Labes Discos 
-        Disco1 = new JLabel("Disco1", SwingConstants.CENTER);
-	Disco1.setBounds(160, 295, 80, 15); /*(+10,-15,-20,0)*/
-	Disco1.setBackground(Color.pink);
-	Disco1.setOpaque(true);
-	frame.add(Disco1);
-
-	Disco2 = new JLabel("Disco2", SwingConstants.CENTER);
-	Disco2.setBounds(150, 310, 100, 15); /*(+10,-15,-20,0)*/
-	Disco2.setBackground(Color.MAGENTA);
-	Disco2.setOpaque(true);
-	frame.add(Disco2);
-
-	Disco3 = new JLabel("Disco3", SwingConstants.CENTER);
-	Disco3.setBounds(140, 325, 120, 15); /*(+10,-15,-20,0)*/
-	Disco3.setBackground(Color.CYAN);
-	Disco3.setOpaque(true);
-	frame.add(Disco3);
-
-	Disco4 = new JLabel("Disco4", SwingConstants.CENTER);
-	Disco4.setBounds(130, 340, 140, 15); /*(+10,-15,-20,0)*/
-	Disco4.setBackground(Color.green);
-	Disco4.setOpaque(true);
-	frame.add(Disco4);
-
-	Disco5 = new JLabel("Disco5", SwingConstants.CENTER);
-	Disco5.setBounds(120, 355, 160, 15); /*(+10,0,-20,0)*/
-	Disco5.setBackground(Color.yellow);
-	Disco5.setOpaque(true);
-	frame.add(Disco5);
-
-	Disco6 = new JLabel("Disco6", SwingConstants.CENTER);
-	Disco6.setBounds(110, 370, 180, 15); /*(+10,0,-20,0)*/
-	Disco6.setBackground(Color.orange);
-	Disco6.setOpaque(true);
-	frame.add(Disco6);
-
-	Disco7 = new JLabel("Disco7", SwingConstants.CENTER);
-	Disco7.setBounds(100, 385, 200, 15);  /*(+10,0,-20,0)*/
-	Disco7.setBackground(Color.red);
-	Disco7.setOpaque(true);
-	frame.add(Disco7);
+        
+        for (int i=6;i>=0;i--){
+            if (T1[i].getDisco() !=0){
+                JLabel Disccscs = new JLabel("Disco" + T1[i].getDisco(), SwingConstants.CENTER);
+                Disccscs.setBounds(T1[i].getPosicionx(), T1[i].getPosiciony(), T1[i].getLargo(), 15);
+                
+                if(T1[i].getDisco()==1){
+                    Disccscs.setBackground(Color.pink);
+                }else if(T1[i].getDisco() ==2){
+                    Disccscs.setBackground(Color.MAGENTA);
+                }else if(T1[i].getDisco() ==3){
+                    Disccscs.setBackground(Color.CYAN);
+                }else if(T1[i].getDisco() ==4){
+                    Disccscs.setBackground(Color.green);
+                }else if(T1[i].getDisco() ==5){
+                    Disccscs.setBackground(Color.yellow);
+                }else if(T1[i].getDisco() ==6){
+                    Disccscs.setBackground(Color.orange);
+                }else if(T1[i].getDisco() ==7){
+                    Disccscs.setBackground(Color.red);
+                }else if(T1[i].getDisco() ==8){
+                    Disccscs.setBackground(Color.red);
+                }
+                
+                Disccscs.setOpaque(true);
+                frame.add(Disccscs);
+            } 
+        }
         
 
         //Labels---------------------------------------------------------------
@@ -154,12 +140,37 @@ public class juego {
         {public void actionPerformed(ActionEvent e) {  System.out.println("gracias por jugar"); System.exit(0); }});
         frame.add(Out);
         
+        JButton Next1 = new JButton(">");
+        Next1.setBounds(250,425,50,20);
+        Next1.addActionListener(new ActionListener() 
+        {public void actionPerformed(ActionEvent e) {  System.out.println("Next1"); operaciones.NextT1();  }});
+        frame.add(Next1);
+        
+        
+        JButton Next2 = new JButton(">");
+        Next2.setBounds(550,425,50,20);
+        Next2.addActionListener(new ActionListener() 
+        {public void actionPerformed(ActionEvent e) {  System.out.println("Next2");  }});
+        frame.add(Next2);
+        
+        JButton Back2 = new JButton("<");
+        Back2.setBounds(400,425,50,20);
+        Back2.addActionListener(new ActionListener() 
+        {public void actionPerformed(ActionEvent e) {  System.out.println("Back2");  }});
+        frame.add(Back2);
+        
+        
+        JButton Back3 = new JButton("<");
+        Back3.setBounds(700,425,50,20);
+        Back3.addActionListener(new ActionListener() 
+        {public void actionPerformed(ActionEvent e) {  System.out.println("Back3");  }});
+        frame.add(Back3);
+        
         //Mostrar//
         frame.setVisible(true);
     }
     
     public void InitializeTowers(){
-        
         int posicionx = 100;
         int posiciony = 385;
         int largo = 200;
@@ -168,8 +179,7 @@ public class juego {
         posicionx += (Pantallas.Cantidad_Discos-1) * 10;
         posiciony -= (Pantallas.Cantidad_Discos-1) * 15;
         largo -= (Pantallas.Cantidad_Discos-1) * 20;
-       
-        
+
         for (int i=0;i<7;i++){
             
             if (Pantallas.Cantidad_Discos>=auxcontadot){
@@ -183,10 +193,13 @@ public class juego {
             auxcontadot+=1;
         }
         
-        for (int i=6;i>=0;i--){
-            if (T1[i].getDisco() !=0){
-                 System.out.println( T1[i].getDisco() + " enx:" + T1[i].getPosicionx() + " Eny:" + T1[i].getPosiciony() + " largo: " + T1[i].getLargo());
-            } 
+         for (int i=0;i<7;i++){
+            T2[i] = new torreBase(0,0,0,0);
+            T3[i] = new torreBase(0,0,0,0);
+            
+           
         }
+        
+        
     }
 }
