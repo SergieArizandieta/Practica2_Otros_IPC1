@@ -1,5 +1,6 @@
 
 package Hilos;
+ //Elemntos de otras clases
 import static Operaciones.operaciones.RefreshTowers;
 import static Operaciones.operaciones.verification;
 import Pantallas.Pantallas;
@@ -9,13 +10,14 @@ import static Pantallas.juego.frame;
 import static Pantallas.juego.lblValorMovimiento;
 import static Pantallas.juego.lblValorTiempo;
 
+
 public class General extends Thread {
+    //Hilo principal recarga frame del juego
     public void run() {
-        int a = 0;
+
         while (GameOver) {           
             try{
-                a+=1;
-                System.out.println("Hola" + a);
+
                 RefreshTowers();
                 verification();
 

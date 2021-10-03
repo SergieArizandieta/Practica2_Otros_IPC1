@@ -1,8 +1,14 @@
 
 package Pantallas;
-
+ //Elemntos de otras clases
 import Objetos.torreBase;
 import static Pantallas.Pantallas.Menu;
+import Operaciones.operaciones;
+import Hilos.General;
+import Hilos.Tiempo;
+import static Operaciones.operaciones.RefreshAll;
+
+ //Elemntos de java
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -10,10 +16,8 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
-import Operaciones.operaciones;
-import Hilos.General;
-import Hilos.Tiempo;
-import static Operaciones.operaciones.RefreshAll;
+
+
 
 
 public class juego {
@@ -34,6 +38,7 @@ public class juego {
     public static General Hgeneral = new General();
     public static Tiempo Htimepo = new Tiempo();
     
+    //Iniciar el juego
     public void startgame(){
         Initialize(); 
         GameOver = true;
@@ -51,6 +56,7 @@ public class juego {
         
     }
 
+    //Abriendo juego
     public void Initialize() {
         
         System.out.println(Pantallas.Cantidad_Discos);
@@ -178,13 +184,13 @@ public class juego {
 
         //Botones---------------------------------------------------------------
         JButton back = new JButton("Regresar");
-        back.setBounds(50,500,100,20);
+        back.setBounds(825,500,100,20);
         back.addActionListener(new ActionListener() 
         {public void actionPerformed(ActionEvent e) {RefreshAll(); frame.dispose(); Menu();  }});
         frame.add(back);
 
         JButton Out = new JButton("Salir");
-        Out.setBounds(825,500,100,20);
+        Out.setBounds(825,525,100,20);
         Out.addActionListener(new ActionListener() 
         {public void actionPerformed(ActionEvent e) {  System.exit(0); }});
         frame.add(Out);
@@ -231,6 +237,7 @@ public class juego {
         frame.setVisible(true);
     }
     
+    //Inicilizando torres
     public void InitializeTowers(){
 
         int posiciony = 295;

@@ -1,10 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package main;
 
+package main;
+ //Elemntos de otras clases
 import Pantallas.Pantallas ;
 import static Pantallas.Pantallas.initializeTable;
 
@@ -12,7 +8,9 @@ import static Pantallas.Pantallas.initializeTable;
 public class main {
 
     public static void main(String[] args) {
+        //Inicializa torres
         initializeTable();
+        //Desplegar menu principal
 	Pantallas.Menu();	
         
     }

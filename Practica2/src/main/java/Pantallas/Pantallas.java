@@ -1,6 +1,9 @@
 package Pantallas;
-
+ //Elemntos de otras clases
 import static Operaciones.operaciones.NombreJugador;
+import static Pantallas.juego.MoviemintosTotales;
+
+ //Elemntos de java
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
@@ -12,7 +15,7 @@ import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.JScrollPane;
-import static Pantallas.juego.MoviemintosTotales;
+
 
 public class Pantallas {
     public static JLabel lblEstado = new JLabel("Config: Predeterminada");
@@ -33,10 +36,11 @@ public class Pantallas {
             Table[i][2] ="0";
         }
         
+        /* ver tabla
         for (int i=0;i<5;i++){
             System.out.println(Table[i][0]+" -- " +Table[i][1] + " -- " + Table[i][2] );
           
-        }
+        }*/
     }
     
     //Actulizar la tabla
@@ -44,43 +48,61 @@ public class Pantallas {
        
         String[][] AuxTable = new String[6][2];   
 
-        
+        //LLenar la tabla aux con los datos actuales
         for (int i=0;i<5;i++){
+            if(Integer.valueOf(Table[i][2])==0){
+                 AuxTable[i][1] =String.valueOf(999999999);
+            }else{
+                AuxTable[i][1] =Table[i][2];
+            }
             AuxTable[i][0] = Table[i][1];
-            AuxTable[i][1] =Table[i][2];
+            
         }
        
+        //asignar el dato mas reciente al ultimo lugar
         AuxTable[5][0] = NombreJugador;
         AuxTable[5][1] = String.valueOf(MoviemintosTotales);
-        for (int x = 0; x < 6; x++) {
-            for (int y = 0; y < 6 - 1; y++) {
-                String nombreActual = AuxTable[y][0];
-                int elementoActual = Integer.valueOf(AuxTable[y][1]);
+        
+        //Metodo borbuja
+        boolean band = false;
+        while (band == false){
+            band = true;
+            for(int i = 0; i < 5; i++){
+            
+                  if (Integer.valueOf(AuxTable[i][1]) > Integer.valueOf(AuxTable[i+1][1])){
+                  
+                    String auxNum = AuxTable[i][1];
+                    AuxTable[i][1]= AuxTable[i+1][1];
+                    AuxTable[i+1][1] = auxNum;
 
-                String nombreSiguiente= AuxTable[y+1][0];
-                int elementoSiguiente = Integer.valueOf(AuxTable[y + 1][1]);
-                if (elementoActual < elementoSiguiente) {
-                    AuxTable[y][0] = nombreSiguiente;
-                    AuxTable[y][1] = String.valueOf(elementoSiguiente);
-                    AuxTable[y + 1][0] = nombreActual;
-                    AuxTable[y + 1][1] = String.valueOf(elementoActual);
-                }
+                    String auxNombre=AuxTable[i][0];
+                    AuxTable[i][0] = AuxTable[i+1][0];
+                    AuxTable[i+1][0] = auxNombre;
+                    band = false;
+                  }  
             }
         }
         
+        
+        
+        /* ver tabla aux
         for (int i=0;i<6;i++){
             System.out.println(AuxTable[i][0] + " -- " + AuxTable[i][1]);
-        }
+        }*/
         
+        //Asignando solo los primeros 5
         for (int i=0;i<5;i++){
+            if(AuxTable[i][1].equals(String.valueOf(999999999))){
+                 Table[i][2] = "0" ;
+            }else{
+                Table[i][2] =AuxTable[i][1];
+            }
             Table[i][1] = AuxTable[i][0];
-            Table[i][2] =AuxTable[i][1];
+            
         }
         
     }
 
- 
-    
     //pantalla de menu
     public static void Menu() {
         //Frame---------------------------------------------------------------

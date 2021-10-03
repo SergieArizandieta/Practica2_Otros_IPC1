@@ -1,5 +1,6 @@
 
 package Operaciones;
+ //Elemntos de otras clases
 import Pantallas.Pantallas;
 import static Pantallas.Pantallas.Cantidad_Discos;
 import static Pantallas.Pantallas.Menu;
@@ -21,7 +22,9 @@ import static Pantallas.juego.T2;
 import static Pantallas.juego.T3;
 import static Pantallas.juego.frame;
 
+ //Elemntos de java
 import javax.swing.JOptionPane;
+
 public class operaciones {
     public static String NombreJugador = ""; 
   
@@ -460,13 +463,15 @@ public class operaciones {
             } 
         }
     }
-
+    
+    //limpia el juego
     public static void RefreshAll(){
         
         Hgeneral.suspend(); Htimepo.suspend(); 
         lblEstado.setText("Config: Predeterminada");
         Tiempo = 120; 
         Cantidad_Discos= 3;
+        MoviemintosTotales = 0;
     }
     
 }

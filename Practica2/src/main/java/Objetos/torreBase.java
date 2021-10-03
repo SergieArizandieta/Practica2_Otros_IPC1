@@ -4,35 +4,23 @@ package Objetos;
 
 public class torreBase {
 
-    /**
-     * @return the Disco
-     */
+
     public int getDisco() {
         return Disco;
     }
 
-    /**
-     * @param Disco the Disco to set
-     */
+
     public void setDisco(int Disco) {
         this.Disco = Disco;
     }
 
-    /**
-     * @return the no
-     */
     public int getNo() {
         return no;
     }
 
-    /**
-     * @param no the no to set
-     */
     public void setNo(int no) {
         this.no = no;
     }
-
-
 
     public int getLargo() {
         return largo;
@@ -58,8 +46,6 @@ public class torreBase {
         this.Posiciony = Posiciony;
     }
 
-  
-   
     private int no ;
     private int Posicionx ;
     private int Posiciony ;
@@ -72,9 +58,5 @@ public class torreBase {
         this.Posiciony=Posiciony;
         this.largo=largo;
         this.Disco = Disco;
-    }
-
-
-    
-    
+    }  
 }
