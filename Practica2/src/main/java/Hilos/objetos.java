@@ -14,9 +14,13 @@ import javax.swing.JButton;
 
 
 public class objetos extends Thread {
-    
+    //-----------------------------------------------------------------------------------------
+    //boolean para saber si le dieron click
     public boolean clickeado = false;
+    //JBotton para el objeto
     JButton imagen;
+    //-----------------------------------------------------------------------------------------
+    
     
     //Crear el objeto y agregarlo al frame
     public void objeto () {
@@ -33,7 +37,9 @@ public class objetos extends Thread {
             ImageIcon render = new ImageIcon(nuevo);
             imagen.setIcon(render);
             frame.add(imagen);
-        }catch(Exception e){}
+        }catch(Exception e){
+            //System.out.println(e);
+        }
     }
     
     int modulador =2;
@@ -102,6 +108,8 @@ public class objetos extends Thread {
                 }
 
             }
-        }catch(Exception e){}
+        }catch(Exception e){
+            //System.out.println(e);
+        }
     }
 }

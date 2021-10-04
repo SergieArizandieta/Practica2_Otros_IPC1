@@ -17,50 +17,61 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
-
-
-
 public class juego {
-  
-   public static boolean Fistime =true;
-   public static int MoviemintosTotales = 0;
-    
-    public static boolean GameOver = true;
-    public static JFrame frame;
-    public static JLabel Disco1,Disco2,Disco3,Disco4,Disco5,Disco6,Disco7;
-    public static JLabel lblValorTiempo,lblValorMovimiento;
-    
-    
-    public static int[][] Base = new int[7][2];
-    public static torreBase T1[] = new torreBase[7];
-    public static torreBase T2[] = new torreBase[7];
-    public static torreBase T3[] = new torreBase[7];
-    public static General Hgeneral = new General();
-    public static Tiempo Htimepo = new Tiempo();
-    
+    //-----------------------------------------------------------------------------------------
+        //Primera vez que juega
+        public static boolean Fistime =true;
+
+        //Movimientos rwalizao\dos
+        public static int MoviemintosTotales = 0;
+
+        //darle seguimiento al hilo o no
+        public static boolean HiloTime = false;
+
+        //Saber si perdio
+        public static boolean GameOver = true;
+
+        //Frame del jueglo
+        public static JFrame frame;
+
+        //ELabls de los discos
+        public static JLabel Disco1,Disco2,Disco3,Disco4,Disco5,Disco6,Disco7;
+        //Labels del timpo y movimntos
+        public static JLabel lblValorTiempo,lblValorMovimiento;
+
+        //Dato inical de las torres
+        public static int[][] Base = new int[7][2];
+
+        //Instanciar las 3 torres
+        public static torreBase T1[] = new torreBase[7];
+        public static torreBase T2[] = new torreBase[7];
+        public static torreBase T3[] = new torreBase[7];
+
+        //IInstanciciar hilo general
+        public static General Hgeneral = new General();
+        //Instanciar hilo de timepo
+        public static Tiempo Htimepo = new Tiempo();
+    //-----------------------------------------------------------------------------------------
+        
     //Iniciar el juego
     public void startgame(){
         Initialize(); 
-        GameOver = true;
+      
+        
         if (Fistime){
             Htimepo.start();
             Hgeneral.start();
             Fistime = false;
         }else{
             
-            Htimepo.resume();
             Hgeneral.resume();
-        }
-       
-        
-        
+            Htimepo.resume();
+        }  
     }
 
     //Abriendo juego
     public void Initialize() {
         
-        System.out.println(Pantallas.Cantidad_Discos);
-        System.out.println(Pantallas.Tiempo);
         //Frame---------------------------------------------------------------
         frame = new JFrame();
         frame.setTitle("Torres de Hanoi - Game");
@@ -186,7 +197,7 @@ public class juego {
         JButton back = new JButton("Regresar");
         back.setBounds(825,500,100,20);
         back.addActionListener(new ActionListener() 
-        {public void actionPerformed(ActionEvent e) {RefreshAll(); frame.dispose(); Menu();  }});
+        {public void actionPerformed(ActionEvent e) {Htimepo.suspend(); RefreshAll(); frame.dispose(); Menu();  }});
         frame.add(back);
 
         JButton Out = new JButton("Salir");

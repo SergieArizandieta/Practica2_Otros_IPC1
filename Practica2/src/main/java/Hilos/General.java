@@ -16,8 +16,7 @@ public class General extends Thread {
     public void run() {
 
         while (GameOver) {           
-            try{
-
+            try{  
                 RefreshTowers();
                 verification();
 

@@ -1,11 +1,16 @@
 package Pantallas;
  //Elemntos de otras clases
+import Hilos.autoGame;
+import  Operaciones.operaciones;
 import static Operaciones.operaciones.NombreJugador;
+import static Operaciones.operaciones.disco;
+import static Operaciones.operaciones.movimintosAuto;
 import static Pantallas.juego.MoviemintosTotales;
 
  //Elemntos de java
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -18,14 +23,34 @@ import javax.swing.JScrollPane;
 
 
 public class Pantallas {
-    public static JLabel lblEstado = new JLabel("Config: Predeterminada");
     
-    
-    public static String[][] Table = new String[5][3];   
-    public static int Cantidad_Discos=3;
-    public static int Tiempo=120;
+    //-----------------------------------------------------------------------------------------
+        //data del juego automatico
+        public static String[] pasosAuto = new String[500];
+        //Ventana del juego automatico
+        public static JFrame Autoframe;
+        //lista del juego automatico
+        public static JList showAuto;
 
-    public static juego hanoi = new juego();
+        //Label que muestra la cofig
+        public static JLabel lblEstado = new JLabel("Config: Predeterminada");
+        public static JLabel lblMovimeintosAuto ;
+
+        //Creado torres
+        public static String[][] Table = new String[5][3];   
+        public static int Cantidad_Discos=3;
+        public static int Tiempo=120;
+
+        //Instanciar juego
+        public static juego hanoi = new juego();
+
+        //Instanciar Hilo de juego automatico
+        public static autoGame HAuto = new autoGame();
+        
+        //Controlar hilo
+        public static boolean Fistimec= true;
+    //-----------------------------------------------------------------------------------------
+    
     
     //Inicalizar la tabla
     public static void initializeTable(){
@@ -43,64 +68,64 @@ public class Pantallas {
         }*/
     }
     
-    //Actulizar la tabla
+    //Actulizar la tabla para juego
     public static void refresTable(){
-       
-        String[][] AuxTable = new String[6][2];   
+       if (Cantidad_Discos==3){
+            String[][] AuxTable = new String[6][2];   
 
-        //LLenar la tabla aux con los datos actuales
-        for (int i=0;i<5;i++){
-            if(Integer.valueOf(Table[i][2])==0){
-                 AuxTable[i][1] =String.valueOf(999999999);
-            }else{
-                AuxTable[i][1] =Table[i][2];
-            }
-            AuxTable[i][0] = Table[i][1];
-            
-        }
-       
-        //asignar el dato mas reciente al ultimo lugar
-        AuxTable[5][0] = NombreJugador;
-        AuxTable[5][1] = String.valueOf(MoviemintosTotales);
-        
-        //Metodo borbuja
-        boolean band = false;
-        while (band == false){
-            band = true;
-            for(int i = 0; i < 5; i++){
-            
-                  if (Integer.valueOf(AuxTable[i][1]) > Integer.valueOf(AuxTable[i+1][1])){
-                  
-                    String auxNum = AuxTable[i][1];
-                    AuxTable[i][1]= AuxTable[i+1][1];
-                    AuxTable[i+1][1] = auxNum;
+            //LLenar la tabla aux con los datos actuales
+            for (int i=0;i<5;i++){
+                if(Integer.valueOf(Table[i][2])==0){
+                     AuxTable[i][1] =String.valueOf(999999999);
+                }else{
+                    AuxTable[i][1] =Table[i][2];
+                }
+                AuxTable[i][0] = Table[i][1];
 
-                    String auxNombre=AuxTable[i][0];
-                    AuxTable[i][0] = AuxTable[i+1][0];
-                    AuxTable[i+1][0] = auxNombre;
-                    band = false;
-                  }  
+            }
+
+            //asignar el dato mas reciente al ultimo lugar
+            AuxTable[5][0] = NombreJugador;
+            AuxTable[5][1] = String.valueOf(MoviemintosTotales);
+
+            //Metodo borbuja
+            boolean band = false;
+            while (band == false){
+                band = true;
+                for(int i = 0; i < 5; i++){
+
+                      if (Integer.valueOf(AuxTable[i][1]) > Integer.valueOf(AuxTable[i+1][1])){
+
+                        String auxNum = AuxTable[i][1];
+                        AuxTable[i][1]= AuxTable[i+1][1];
+                        AuxTable[i+1][1] = auxNum;
+
+                        String auxNombre=AuxTable[i][0];
+                        AuxTable[i][0] = AuxTable[i+1][0];
+                        AuxTable[i+1][0] = auxNombre;
+                        band = false;
+                      }  
+                }
+            }
+
+
+
+            /* ver tabla aux
+            for (int i=0;i<6;i++){
+                System.out.println(AuxTable[i][0] + " -- " + AuxTable[i][1]);
+            }*/
+
+            //Asignando solo los primeros 5
+            for (int i=0;i<5;i++){
+                if(AuxTable[i][1].equals(String.valueOf(999999999))){
+                     Table[i][2] = "0" ;
+                }else{
+                    Table[i][2] =AuxTable[i][1];
+                }
+                Table[i][1] = AuxTable[i][0];
+
             }
         }
-        
-        
-        
-        /* ver tabla aux
-        for (int i=0;i<6;i++){
-            System.out.println(AuxTable[i][0] + " -- " + AuxTable[i][1]);
-        }*/
-        
-        //Asignando solo los primeros 5
-        for (int i=0;i<5;i++){
-            if(AuxTable[i][1].equals(String.valueOf(999999999))){
-                 Table[i][2] = "0" ;
-            }else{
-                Table[i][2] =AuxTable[i][1];
-            }
-            Table[i][1] = AuxTable[i][0];
-            
-        }
-        
     }
 
     //pantalla de menu
@@ -130,7 +155,7 @@ public class Pantallas {
         JButton AutoGame = new JButton("Juego Automatico");
         AutoGame.setBounds(100,150,200,20);
         AutoGame.addActionListener(new ActionListener() 
-        {public void actionPerformed(ActionEvent e) {  frame.dispose(); AutoGame(); }});
+        {public void actionPerformed(ActionEvent e) {  frame.dispose();  AutoGame(); }});
         frame.add(AutoGame);
         
         JButton Records = new JButton("Top 5");
@@ -253,8 +278,8 @@ public class Pantallas {
         frame.setLocationRelativeTo(null);
 
         //Labels---------------------------------------------------------------
-        JLabel lbl = new JLabel("Los top 5 mejores jugadores");
-        lbl.setBounds(120,10,230,40);
+        JLabel lbl = new JLabel("Los top 5 mejores jugadores de 3 discos");
+        lbl.setBounds(90,10,230,40);
         frame.add(lbl);
         
         //JTable---------------------------------------------------------------
@@ -286,57 +311,91 @@ public class Pantallas {
     //pantalla de juego automatico
     public static void AutoGame() {
         //Frame---------------------------------------------------------------
-        JFrame frame = new JFrame();
-        frame.setTitle("Torres de Hanoi - AutoGame");
-        frame.setSize(800,600);
-        frame.setLayout(null);
-        frame.setLocationRelativeTo(null);
+        Autoframe = new JFrame();
+        Autoframe.setTitle("Torres de Hanoi - AutoGame");
+        Autoframe.setSize(800,600);
+        Autoframe.setLayout(null);
+        Autoframe.setLocationRelativeTo(null);
 
         //Labels---------------------------------------------------------------
         
         JLabel lblTitulo = new JLabel("Juego Automático");
         lblTitulo.setBounds(350,10,230,40);
-        frame.add(lblTitulo);
+        Autoframe.add(lblTitulo);
         
         JLabel lblDiscos = new JLabel("Discos");
         lblDiscos.setBounds(100,80,230,40);
-        frame.add(lblDiscos);
+        Autoframe.add(lblDiscos);
         
         JLabel lblMovimiento= new JLabel("Movimiento");
         lblMovimiento.setBounds(175,80,230,40);
-        frame.add(lblMovimiento);
+        Autoframe.add(lblMovimiento);
         
         //LabelDeValor---------------------------------------------------------
         
-        JLabel lblValorDiscos = new JLabel("V000");
+        JLabel lblValorDiscos = new JLabel(String.valueOf(Cantidad_Discos));
         lblValorDiscos.setBounds(100,110,230,40);
-        frame.add(lblValorDiscos);
+        Autoframe.add(lblValorDiscos);
         
-        JLabel lblValorMovimiento= new JLabel("V001");
-        lblValorMovimiento.setBounds(175,110,230,40);
-        frame.add(lblValorMovimiento);
+        lblMovimeintosAuto= new JLabel(String.valueOf(movimintosAuto));
+        lblMovimeintosAuto.setBounds(175,110,230,40);
+        Autoframe.add(lblMovimeintosAuto);
         
         //TextField---------------------------------------------------------------
-        String nombres[] = { "Cristian", "Julian", "Milena"};
-        JList ListRecord = new JList(nombres);
-        ListRecord.setBounds(100,175,600,200);
-        frame.add(ListRecord);
+        String nombres[] = { "Inicie el juego automatico"};
+        showAuto = new JList(nombres);
+       
+        JScrollPane Scroll = new JScrollPane(showAuto);  
+        Scroll.setBounds(100,175,600,200);      
+        Autoframe.add(Scroll);
 
         //Botones---------------------------------------------------------------
         JButton back = new JButton("Regresar");
         back.setBounds(50,500,100,20);
         back.addActionListener(new ActionListener() 
-        {public void actionPerformed(ActionEvent e) { frame.dispose(); Menu(); }});
-        frame.add(back);
-
+        {public void actionPerformed(ActionEvent e) { 
+            movimintosAuto = 0;
+            disco = 0;
+            
+            Autoframe.dispose(); 
+            Menu();
+            HAuto.suspend();
+            lblEstado.setText("Config: Predeterminada");
+            Tiempo = 120; 
+            Cantidad_Discos= 3;
+            MoviemintosTotales = 0;
+        }});
+        Autoframe.add(back);
+        
+        JButton start = new JButton("Inicio");
+        start.setBounds(450,500,100,20);
+        start.addActionListener(new ActionListener() 
+        {public void actionPerformed(ActionEvent e) {movimintosAuto = 0; startAuto(); operaciones.automaticGame(); }});
+        Autoframe.add(start);
+        
+        
         JButton Out = new JButton("Salir");
         Out.setBounds(600,500,100,20);
         Out.addActionListener(new ActionListener() 
         {public void actionPerformed(ActionEvent e) {  System.out.println("gracias por jugar"); System.exit(0); }});
-        frame.add(Out);
+        Autoframe.add(Out);
         
         //Mostrar//
-        frame.setVisible(true);
+        Autoframe.setVisible(true);
+    }
+    
+    //Comenzar hilo de juego auamtico
+    public static void startAuto(){
+        DefaultListModel listmodel=new DefaultListModel();
+        showAuto.setModel(listmodel);
+       
+        if (Fistimec){
+           
+            HAuto.start();
+            Fistimec= false;
+        }else{
+            HAuto.resume();
+        }
     }
 
 

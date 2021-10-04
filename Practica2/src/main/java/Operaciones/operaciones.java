@@ -15,6 +15,7 @@ import static Pantallas.juego.Disco5;
 import static Pantallas.juego.Disco6;
 import static Pantallas.juego.Disco7;
 import static Pantallas.juego.Hgeneral;
+import  Pantallas.juego;
 import static Pantallas.juego.Htimepo;
 import static Pantallas.juego.MoviemintosTotales;
 import static Pantallas.juego.T1;
@@ -26,8 +27,11 @@ import static Pantallas.juego.frame;
 import javax.swing.JOptionPane;
 
 public class operaciones {
+    //-----------------------------------------------------------------------------------------
+    //Nombre dek jugador que se guardara
     public static String NombreJugador = ""; 
-  
+    //-----------------------------------------------------------------------------------------
+    
     //Mover disco de Torre 1 a Torre 2
     public  static void NextT1(){
         int T1auxDisc = 0;
@@ -467,11 +471,22 @@ public class operaciones {
     //limpia el juego
     public static void RefreshAll(){
         
-        Hgeneral.suspend(); Htimepo.suspend(); 
+        Hgeneral.suspend(); 
+        juego.HiloTime = false;
         lblEstado.setText("Config: Predeterminada");
         Tiempo = 120; 
         Cantidad_Discos= 3;
         MoviemintosTotales = 0;
     }
+     //Metodo recursivo
+    public  static int movimintosAuto = 0;
+    public static boolean jugarAuto =false;
+    public  static int disco = 0;
     
+    //Juego automatico
+    public static void automaticGame(){
+            disco = Cantidad_Discos;   
+            jugarAuto = true;
+    }
+   
 }
