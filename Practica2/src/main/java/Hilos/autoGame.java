@@ -11,24 +11,34 @@ import static Pantallas.Pantallas.Autoframe;
 import static Pantallas.Pantallas.lblMovimeintosAuto;
 import static Pantallas.Pantallas.pasosAuto;
 import static Pantallas.Pantallas.showAuto;
-
+import java.util.concurrent.TimeUnit;
 
 public class autoGame extends Thread {
+    //-----------------------------------------------------------------------------
+    
+    //guarda la info de los movimientos
+    public static String dataaux = "";
+    
+    //valida que no se pueda salir si no terminado el proceso
+    public static boolean RegresarValidacion =true ;
+    
+    //-------------------------------------------------------------------------------
     //Hilo del juego automatico
     public void run() {
 
             while (true) { 
-                System.out.println("Actulizar");
+               
                 try{ 
-                    sleep(1000);
+                    sleep(100);
                    
                     if(operaciones.jugarAuto){
-                        
-                        automaticGame(operaciones.disco,"Torre 1","Torre 2","Torre 3");
+                        RegresarValidacion = false;
+                        automaticGame("Torre 1","Torre 2",operaciones.disco,"Torre 3");
+                        dataaux ="";
+                        RegresarValidacion = true;
                         operaciones.jugarAuto = false;                   
                     }
-                   
-                   
+                    
                     showAuto.setListData(pasosAuto);
                     Autoframe.invalidate();
                     Autoframe.validate();
@@ -42,19 +52,36 @@ public class autoGame extends Thread {
             }
     }
     
+  
     //Metodo recursivo para las torres
-    public static void automaticGame(int Disco, String inicio, String medio, String fin){
-        
-        if (Disco != 0){
-            movimintosAuto +=1;
-            String PasoGuardado;
-            automaticGame(Disco-1, inicio, fin, medio);
-            PasoGuardado = ("Se movio el Disco #" + Disco + " del poste #" + inicio + " al posete #" + fin);
-            pasosAuto[movimintosAuto-1] = PasoGuardado;
-            automaticGame(Disco-1, medio, inicio, fin);
-        }else{
-           return;
-        }
+    public static void automaticGame( String inicio, String medio,int Disco, String fin){
+        try {
+            if (Disco != 0){
+              
+                                
+                automaticGame( inicio, fin,Disco-1, medio);
+              
+                String PasoGuardado = ("Se movio el Disco #" + Disco + " del poste #" + inicio + " al posete #" + fin);
+                //----Actuliza frame
+                movimintosAuto+=1;
+                dataaux += PasoGuardado + "~";
+                pasosAuto = dataaux.split("~");
+                showAuto.setListData(pasosAuto);
+                Autoframe.invalidate();
+                Autoframe.validate();
+                Autoframe.repaint();   
+                lblMovimeintosAuto.setText(String.valueOf(movimintosAuto));
+                TimeUnit.SECONDS.sleep(1); // delay few seconds (1)
+                //--
+                
+            
+                automaticGame( medio, inicio,Disco-1, fin);
+            }else{
+               return;
+            }
 
+        } catch (InterruptedException e) {
+         //Sytem.out.print(e);
+        }
     }
 }

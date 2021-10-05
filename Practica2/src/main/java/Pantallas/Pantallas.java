@@ -1,12 +1,14 @@
 package Pantallas;
  //Elemntos de otras clases
 import Hilos.autoGame;
+import static Hilos.autoGame.RegresarValidacion;
+import static Hilos.autoGame.automaticGame;
 import  Operaciones.operaciones;
 import static Operaciones.operaciones.NombreJugador;
 import static Operaciones.operaciones.disco;
 import static Operaciones.operaciones.movimintosAuto;
 import static Pantallas.juego.MoviemintosTotales;
-
+import static Hilos.autoGame.dataaux;
  //Elemntos de java
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -154,7 +156,7 @@ public class Pantallas {
         JButton AutoGame = new JButton("Juego Automatico");
         AutoGame.setBounds(100,150,200,20);
         AutoGame.addActionListener(new ActionListener() 
-        {public void actionPerformed(ActionEvent e) {  frame.dispose();  AutoGame(); }});
+        {public void actionPerformed(ActionEvent e) {  frame.dispose(); AutoGame(); RefreshVars(); }});
         frame.add(AutoGame);
         
         JButton Records = new JButton("Top 5");
@@ -340,7 +342,7 @@ public class Pantallas {
         lblMovimeintosAuto.setBounds(175,110,230,40);
         Autoframe.add(lblMovimeintosAuto);
         
-        //TextField---------------------------------------------------------------
+        //TextList---------------------------------------------------------------
         String nombres[] = { "Inicie el juego automatico"};
         showAuto = new JList(nombres);
        
@@ -353,23 +355,30 @@ public class Pantallas {
         back.setBounds(50,500,100,20);
         back.addActionListener(new ActionListener() 
         {public void actionPerformed(ActionEvent e) { 
-            movimintosAuto = 0;
-            disco = 0;
+            if(RegresarValidacion){
             
-            Autoframe.dispose(); 
-            Menu();
-            HAuto.suspend();
-            lblEstado.setText("Config: Predeterminada");
-            Tiempo = 120; 
-            Cantidad_Discos= 3;
-            MoviemintosTotales = 0;
+                movimintosAuto = 0;
+                disco = 0;
+
+                Autoframe.dispose(); 
+                Menu();
+                HAuto.suspend();
+                lblEstado.setText("Config: Predeterminada");
+                Tiempo = 120; 
+                Cantidad_Discos= 3;
+                MoviemintosTotales = 0;
+            }
         }});
         Autoframe.add(back);
         
         JButton start = new JButton("Inicio");
         start.setBounds(450,500,100,20);
         start.addActionListener(new ActionListener() 
-        {public void actionPerformed(ActionEvent e) {movimintosAuto = 0; startAuto(); operaciones.automaticGame(); }});
+        {public void actionPerformed(ActionEvent e) {
+            if(RegresarValidacion){
+            movimintosAuto = 0; startAuto(); operaciones.automaticGame(); 
+            }
+        }});
         Autoframe.add(start);
         
         
@@ -385,17 +394,25 @@ public class Pantallas {
     
     //Comenzar hilo de juego auamtico
     public static void startAuto(){
-        DefaultListModel listmodel=new DefaultListModel();
-        showAuto.setModel(listmodel);
-       
+        RefreshVars();
         if (Fistimec){
-           
             HAuto.start();
             Fistimec= false;
         }else{
             HAuto.resume();
         }
     }
-
+    
+    //Refresa Jlist, la data del Jlist y varible que guarda los pasos
+    public static void RefreshVars(){
+        DefaultListModel listmodel=new DefaultListModel();
+        showAuto.setModel(listmodel);
+        
+        for (int i = 0; i < pasosAuto.length -1; i++) {
+            pasosAuto[i]= "";
+        }
+        
+        dataaux = "";
+    }
 
 }

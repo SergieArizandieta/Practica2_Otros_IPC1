@@ -499,6 +499,7 @@ public class operaciones {
     
     //Juego automatico
     public static void automaticGame(){
+            movimintosAuto= 0;
             disco = Cantidad_Discos;   
             jugarAuto = true;
     }
