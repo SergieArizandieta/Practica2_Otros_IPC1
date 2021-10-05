@@ -72,7 +72,9 @@ public class operaciones {
         T1[auxPosicion].setDisco(0);
         T1[auxPosicion].setLargo(0);
         T1[auxPosicion].setPosicionx(0);
+        System.out.println("Toree 1 a Torre 2");
         
+        /*
         System.out.println("Toree1");
         for (i=6;i>=0;i--){
             if (T1[i].getDisco() !=0){
@@ -84,7 +86,7 @@ public class operaciones {
             if (T2[i].getDisco() !=0){
                 System.out.println( T2[i].getDisco() + " enx:" + T2[i].getPosicionx() + " Eny:" + T2[i].getPosiciony() + " largo: " + T2[i].getLargo());
             }
-        }  
+        }  */
         
     }
     
@@ -128,7 +130,9 @@ public class operaciones {
         T1[auxPosicion].setDisco(0);
         T1[auxPosicion].setLargo(0);
         T1[auxPosicion].setPosicionx(0);
+        System.out.println("Toree 1 a Torre 3");
         
+        /*
         System.out.println("Toree1");
         for (i=6;i>=0;i--){
             if (T1[i].getDisco() !=0){
@@ -141,7 +145,7 @@ public class operaciones {
                 System.out.println( T3[i].getDisco() + " enx:" + T3[i].getPosicionx() + " Eny:" + T3[i].getPosiciony() + " largo: " + T3[i].getLargo());
             }
         }  
-        
+        */
     }
     
     //Mover disco de Torre 2 a Torre 3
@@ -184,7 +188,8 @@ public class operaciones {
         T2[auxPosicion].setDisco(0);
         T2[auxPosicion].setLargo(0);
         T2[auxPosicion].setPosicionx(0);
-        
+        System.out.println("Toree 2 a Torre 3");
+        /*
         System.out.println("Toree2");
         for (i=6;i>=0;i--){
             if (T2[i].getDisco() !=0){
@@ -196,7 +201,7 @@ public class operaciones {
             if (T3[i].getDisco() !=0){
                 System.out.println( T3[i].getDisco() + " enx:" + T3[i].getPosicionx() + " Eny:" + T3[i].getPosiciony() + " largo: " + T3[i].getLargo());
             }
-        }  
+        }  */
         
     }
     
@@ -240,7 +245,9 @@ public class operaciones {
         T2[auxPosicion].setDisco(0);
         T2[auxPosicion].setLargo(0);
         T2[auxPosicion].setPosicionx(0);
-
+        System.out.println("Toree 2 a Torre 1");
+        
+        /*
         System.out.println("Toree1");
         for (i=6;i>=0;i--){
             if (T1[i].getDisco() !=0){
@@ -253,7 +260,7 @@ public class operaciones {
             if (T2[i].getDisco() !=0){
                 System.out.println( T2[i].getDisco() + " enx:" + T2[i].getPosicionx() + " Eny:" + T2[i].getPosiciony() + " largo: " + T2[i].getLargo());
             }
-        }    
+        }    */
     }
        
     //Mover disco de Torre 3 a Torre 2
@@ -296,7 +303,10 @@ public class operaciones {
         T3[auxPosicion].setDisco(0);
         T3[auxPosicion].setLargo(0);
         T3[auxPosicion].setPosicionx(0);
-
+        System.out.println("Toree 3 a Torre 2");
+        
+        /*
+          
         System.out.println("Torre2");
          for (i=6;i>=0;i--){
             if (T2[i].getDisco() !=0){
@@ -308,7 +318,7 @@ public class operaciones {
             if (T3[i].getDisco() !=0){
                 System.out.println( T3[i].getDisco() + " enx:" + T3[i].getPosicionx() + " Eny:" + T3[i].getPosiciony() + " largo: " + T3[i].getLargo());
             }
-        }  
+        }  */
     }
     
     //Mover disco de Torre 3 a Torre 1
@@ -351,9 +361,10 @@ public class operaciones {
         T3[auxPosicion].setDisco(0);
         T3[auxPosicion].setLargo(0);
         T3[auxPosicion].setPosicionx(0);
-
+        System.out.println("Toree 3 a Torre 1");
+        /*
         System.out.println("Torre1");
-         for (i=6;i>=0;i--){
+        for (i=6;i>=0;i--){
             if (T1[i].getDisco() !=0){
                 System.out.println( T1[i].getDisco() + " enx:" + T1[i].getPosicionx() + " Eny:" + T1[i].getPosiciony() + " largo: " + T1[i].getLargo());
             }
@@ -363,7 +374,7 @@ public class operaciones {
             if (T3[i].getDisco() !=0){
                 System.out.println( T3[i].getDisco() + " enx:" + T3[i].getPosicionx() + " Eny:" + T3[i].getPosiciony() + " largo: " + T3[i].getLargo());
             }
-        }  
+        }  */
     }
     
     //Verificar Si ya gano
@@ -381,6 +392,7 @@ public class operaciones {
                         auxVerificador = T3[i].getDisco();
                         contador+=1;
                         if(contador == Pantallas.Cantidad_Discos){
+                  
                             Htimepo.suspend(); 
                             
                             NombreJugador = (String)JOptionPane.showInputDialog(null, "Ingresa tu nombre:","Ganador", JOptionPane.QUESTION_MESSAGE,null,null,"default text");
@@ -388,7 +400,7 @@ public class operaciones {
                             frame.dispose(); 
                             Menu();
                             RefreshAll();
-
+                             
                             break;
                         }
                     }else{
@@ -471,12 +483,14 @@ public class operaciones {
     //limpia el juego
     public static void RefreshAll(){
         
-        Hgeneral.suspend(); 
+        
         juego.HiloTime = false;
         lblEstado.setText("Config: Predeterminada");
         Tiempo = 120; 
         Cantidad_Discos= 3;
         MoviemintosTotales = 0;
+        Hgeneral.suspend(); 
+
     }
      //Metodo recursivo
     public  static int movimintosAuto = 0;

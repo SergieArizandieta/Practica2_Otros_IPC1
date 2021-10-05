@@ -15,7 +15,8 @@ public class General extends Thread {
     //Hilo principal recarga frame del juego
     public void run() {
 
-        while (GameOver) {           
+        while (GameOver) { 
+          
             try{  
                 RefreshTowers();
                 verification();

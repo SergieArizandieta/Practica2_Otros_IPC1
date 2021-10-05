@@ -17,9 +17,11 @@ public class autoGame extends Thread {
     //Hilo del juego automatico
     public void run() {
 
-            while (true) {     
+            while (true) { 
+                System.out.println("Actulizar");
                 try{ 
                     sleep(1000);
+                   
                     if(operaciones.jugarAuto){
                         
                         automaticGame(operaciones.disco,"Torre 1","Torre 2","Torre 3");

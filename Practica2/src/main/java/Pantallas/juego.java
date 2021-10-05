@@ -55,9 +55,9 @@ public class juego {
         
     //Iniciar el juego
     public void startgame(){
+
         Initialize(); 
-      
-        
+
         if (Fistime){
             Htimepo.start();
             Hgeneral.start();
@@ -67,6 +67,7 @@ public class juego {
             Hgeneral.resume();
             Htimepo.resume();
         }  
+       
     }
 
     //Abriendo juego
@@ -246,10 +247,11 @@ public class juego {
         
         //Mostrar//
         frame.setVisible(true);
+        
     }
     
     //Inicilizando torres
-    public void InitializeTowers(){
+    public  void InitializeTowers(){
 
         int posiciony = 295;
         for (int i=0;i<7;i++){

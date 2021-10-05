@@ -142,14 +142,13 @@ public class Pantallas {
         lbl.setBounds(150,10,130,40);
         frame.add(lbl);
         
-       
         lblEstado.setBounds(20,300,150,40);
         frame.add(lblEstado);
         //Botones---------------------------------------------------------------
         JButton NewGame = new JButton("Nuevo Juego");
         NewGame.setBounds(100,100,200,20);
         NewGame.addActionListener(new ActionListener() 
-        {public void actionPerformed(ActionEvent e) {frame.dispose();hanoi.InitializeTowers(); hanoi.startgame(); }});
+        {public void actionPerformed(ActionEvent e) {frame.dispose();hanoi.InitializeTowers(); hanoi.startgame();  }});
         frame.add(NewGame);
         
         JButton AutoGame = new JButton("Juego Automatico");
@@ -247,7 +246,7 @@ public class Pantallas {
             
             
             if (validacion){
-                lblEstado.setText("Config: Personalizada");
+                lblEstado.setText("Config: Personalizada " + Pantallas.Cantidad_Discos);
                 Tiempo = Integer.valueOf(TextTime.getText()); 
                 Cantidad_Discos= Integer.valueOf(combo.getSelectedItem().toString());
                 JOptionPane.showMessageDialog(null, "Configuracion asignada", " Save"  , JOptionPane.INFORMATION_MESSAGE);

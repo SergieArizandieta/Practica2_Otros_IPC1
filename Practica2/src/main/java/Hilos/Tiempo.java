@@ -37,7 +37,6 @@ public class Tiempo extends Thread {
                     Obj.start();
                 }
                 
-                
                 //Se termino el juego
                 if (Pantallas.Tiempo<=0){
                        juego.HiloTime = true;
